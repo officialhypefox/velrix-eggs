@@ -18,7 +18,7 @@
         "Python 3.13": "ghcr.io/parkervcp/yolks:python_3.13"
     },
     "file_denylist": [],
-    "startup": "if [[ -d .git ]] && [[ \"{{AUTO_UPDATE}}\" == \"1\" ]]; then git pull; fi; if [[ \"{{REINSTALL_PACKAGES}}\" == \"1\" ]]; then if [[ -f /home/container/${REQUIREMENTS_FILE} ]]; then pip install -U --prefix .local -r ${REQUIREMENTS_FILE}; fi; fi; /usr/local/bin/python /home/container/{{APP_FILE}}",
+    "startup": "if [[ -d .git ]] && [[ \"{{AUTO_UPDATE}}\" == \"1\" ]]; then git pull; fi; /usr/local/bin/python /home/container/{{APP_FILE}}",
     "config": {
         "files": "{}",
         "startup": "{\n    \"done\": [\n        \"Started\",\n        \"Listening\"\n    ]\n}",
@@ -62,19 +62,6 @@
             "sort": 2
         },
         {
-            "name": "Reinstall Packages on Start",
-            "description": "Reinstall packages from requirements.txt on every startup.",
-            "env_variable": "REINSTALL_PACKAGES",
-            "default_value": "0",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": [
-                "required",
-                "boolean"
-            ],
-            "sort": 3
-        },
-        {
             "name": "Git Auto Update",
             "description": "Automatically update the application by pulling the latest files from the Git repository on every startup.",
             "env_variable": "AUTO_UPDATE",
@@ -85,7 +72,7 @@
                 "required",
                 "boolean"
             ],
-            "sort": 4
+            "sort": 3
         },
         {
             "name": "Git Repository Address",
@@ -98,7 +85,7 @@
                 "nullable",
                 "string"
             ],
-            "sort": 5
+            "sort": 4
         },
         {
             "name": "Git Branch",
@@ -111,7 +98,7 @@
                 "nullable",
                 "string"
             ],
-            "sort": 6
+            "sort": 5
         },
         {
             "name": "Git Username",
@@ -124,7 +111,7 @@
                 "nullable",
                 "string"
             ],
-            "sort": 7
+            "sort": 6
         },
         {
             "name": "Git Access Token",
@@ -137,7 +124,7 @@
                 "nullable",
                 "string"
             ],
-            "sort": 8
+            "sort": 7
         }
     ]
 }

@@ -17,7 +17,7 @@
         "Node.js 22": "ghcr.io/parkervcp/yolks:nodejs_22"
     },
     "file_denylist": [],
-    "startup": "if [[ -d .git ]] && [[ {{AUTO_UPDATE}} == \"1\" ]]; then git pull; fi; if [[ \"{{REINSTALL_PACKAGES}}\" == \"1\" ]] && [ -f /home/container/package.json ]; then /usr/local/bin/npm install --production; fi; if [[ {{APP_FILE}} == *.js ]]; then /usr/local/bin/node \"/home/container/${APP_FILE}\"; else /usr/local/bin/ts-node --esm \"/home/container/${APP_FILE}\"; fi",
+    "startup": "if [[ -d .git ]] && [[ {{AUTO_UPDATE}} == \"1\" ]]; then git pull; fi; if [[ {{APP_FILE}} == *.js ]]; then /usr/local/bin/node \"/home/container/${APP_FILE}\"; else /usr/local/bin/ts-node --esm \"/home/container/${APP_FILE}\"; fi",
     "config": {
         "files": "{}",
         "startup": "{\n    \"done\": [\n        \"Started\",\n        \"Listening\"\n    ]\n}",
@@ -47,19 +47,6 @@
             "sort": 1
         },
         {
-            "name": "Reinstall Packages on Start",
-            "description": "Reinstall packages from package.json on every startup.",
-            "env_variable": "REINSTALL_PACKAGES",
-            "default_value": "0",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": [
-                "required",
-                "boolean"
-            ],
-            "sort": 2
-        },
-        {
             "name": "Git Auto Update",
             "description": "Automatically update the application by pulling the latest files from the Git repository on every startup.",
             "env_variable": "AUTO_UPDATE",
@@ -70,7 +57,7 @@
                 "required",
                 "boolean"
             ],
-            "sort": 3
+            "sort": 2
         },
         {
             "name": "Git Repository Address",
@@ -83,7 +70,7 @@
                 "nullable",
                 "string"
             ],
-            "sort": 4
+            "sort": 3
         },
         {
             "name": "Git Branch",
@@ -96,7 +83,7 @@
                 "nullable",
                 "string"
             ],
-            "sort": 5
+            "sort": 4
         },
         {
             "name": "Git Username",
@@ -109,7 +96,7 @@
                 "nullable",
                 "string"
             ],
-            "sort": 6
+            "sort": 5
         },
         {
             "name": "Git Access Token",
@@ -122,7 +109,7 @@
                 "nullable",
                 "string"
             ],
-            "sort": 7
+            "sort": 6
         }
     ]
 }
