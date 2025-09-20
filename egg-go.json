@@ -12,9 +12,9 @@
     "tags": [],
     "features": [],
     "docker_images": {
-        "Go 1.21": "ghcr.io/parkervcp/yolks:go_1.21",
+        "Go 1.23": "ghcr.io/parkervcp/yolks:go_1.23",
         "Go 1.22": "ghcr.io/parkervcp/yolks:go_1.22",
-        "Go 1.23": "ghcr.io/parkervcp/yolks:go_1.23"
+        "Go 1.21": "ghcr.io/parkervcp/yolks:go_1.21"
     },
     "file_denylist": [],
     "startup": "if [[ -d .git ]] && [[ {{AUTO_UPDATE}} == \"1\" ]]; then git pull; fi; chmod +x {{EXECUTABLE_NAME}}; ./{{EXECUTABLE_NAME}}",

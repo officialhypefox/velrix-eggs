@@ -12,10 +12,10 @@
     "tags": [],
     "features": [],
     "docker_images": {
-        "Python 3.10": "ghcr.io/parkervcp/yolks:python_3.10",
-        "Python 3.11": "ghcr.io/parkervcp/yolks:python_3.11",
+        "Python 3.13": "ghcr.io/parkervcp/yolks:python_3.13",
         "Python 3.12": "ghcr.io/parkervcp/yolks:python_3.12",
-        "Python 3.13": "ghcr.io/parkervcp/yolks:python_3.13"
+        "Python 3.11": "ghcr.io/parkervcp/yolks:python_3.11",
+        "Python 3.10": "ghcr.io/parkervcp/yolks:python_3.10"
     },
     "file_denylist": [],
     "startup": "if [[ -d .git ]] && [[ \"{{AUTO_UPDATE}}\" == \"1\" ]]; then git pull; fi; /usr/local/bin/python /home/container/{{APP_FILE}}",
