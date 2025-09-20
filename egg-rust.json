@@ -2,7 +2,7 @@
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PANEL",
     "meta": {
         "version": "PLCN_v2",
-        "update_url": null
+        "update_url": "https://raw.githubusercontent.com/officialhypefox/velrix-eggs/refs/heads/main/egg-rust.json"
     },
     "exported_at": "2025-09-19T10:44:46+00:00",
     "name": "Rust",
