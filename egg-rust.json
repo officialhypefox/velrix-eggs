@@ -14,7 +14,7 @@
         "ghcr.io/parkervcp/yolks:rust_latest": "ghcr.io/parkervcp/yolks:rust_latest"
     },
     "file_denylist": [],
-    "startup": "if [[ -d .git ]] && [[ {{AUTO_UPDATE}} == \"1\" ]]; then git pull; fi; cargo build --release; ./target/release/{{EXECUTABLE_NAME}}",
+    "startup": "if [[ -d .git ]] && [[ {{AUTO_UPDATE}} == \"1\" ]]; then git pull; fi; if [[ \"{{REBUILD}}\" == \"1\" ]]; then cargo build --release; fi; ./target/release/{{EXECUTABLE_NAME}}",
     "config": {
         "files": "{}",
         "startup": "{\n    \"done\": [\n        \"Started\",\n        \"Listening\"\n    ]\n}",
@@ -44,6 +44,19 @@
             "sort": 1
         },
         {
+            "name": "Rebuild on Start",
+            "description": "Rebuild the application on every startup.",
+            "env_variable": "REBUILD",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": [
+                "required",
+                "boolean"
+            ],
+            "sort": 2
+        },
+        {
             "name": "Git Repository Address",
             "description": "The Git repository address to clone from.",
             "env_variable": "GIT_ADDRESS",
@@ -54,7 +67,7 @@
                 "nullable",
                 "string"
             ],
-            "sort": 2
+            "sort": 3
         },
         {
             "name": "Git Branch",
@@ -67,7 +80,7 @@
                 "nullable",
                 "string"
             ],
-            "sort": 3
+            "sort": 4
         },
         {
             "name": "Auto Update",
@@ -80,7 +93,7 @@
                 "required",
                 "boolean"
             ],
-            "sort": 4
+            "sort": 5
         },
         {
             "name": "Git Username",
@@ -93,7 +106,7 @@
                 "nullable",
                 "string"
             ],
-            "sort": 5
+            "sort": 6
         },
         {
             "name": "Git Access Token",
@@ -106,7 +119,7 @@
                 "nullable",
                 "string"
             ],
-            "sort": 6
+            "sort": 7
         }
     ]
 }

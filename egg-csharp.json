@@ -17,7 +17,7 @@
         "ghcr.io/parkervcp/yolks:dotnet_9": "ghcr.io/parkervcp/yolks:dotnet_9"
     },
     "file_denylist": [],
-    "startup": "if [[ -d .git ]] && [[ {{AUTO_UPDATE}} == \"1\" ]]; then git pull; fi; cd {{APP_PROJECT_DIR}}; dotnet restore; dotnet run --project {{APP_PROJECT_FILE}}",
+    "startup": "if [[ -d .git ]] && [[ {{AUTO_UPDATE}} == \"1\" ]]; then git pull; fi; if [[ \"{{REBUILD}}\" == \"1\" ]]; then dotnet build --project {{APP_PROJECT_FILE}} -c Release; fi; dotnet run --project {{APP_PROJECT_FILE}} --no-build -c Release",
     "config": {
         "files": "{}",
         "startup": "{\n    \"done\": [\n        \"Started\",\n        \"Listening\"\n    ]\n}",
@@ -60,6 +60,19 @@
             "sort": 2
         },
         {
+            "name": "Rebuild on Start",
+            "description": "Rebuild the application on every startup.",
+            "env_variable": "REBUILD",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": [
+                "required",
+                "boolean"
+            ],
+            "sort": 3
+        },
+        {
             "name": "Git Repository Address",
             "description": "The Git repository address to clone from.",
             "env_variable": "GIT_ADDRESS",
@@ -70,7 +83,7 @@
                 "nullable",
                 "string"
             ],
-            "sort": 3
+            "sort": 4
         },
         {
             "name": "Git Branch",
@@ -83,7 +96,7 @@
                 "nullable",
                 "string"
             ],
-            "sort": 4
+            "sort": 5
         },
         {
             "name": "Auto Update",
@@ -96,7 +109,7 @@
                 "required",
                 "boolean"
             ],
-            "sort": 5
+            "sort": 6
         },
         {
             "name": "Git Username",
@@ -109,7 +122,7 @@
                 "nullable",
                 "string"
             ],
-            "sort": 6
+            "sort": 7
         },
         {
             "name": "Git Access Token",
@@ -122,7 +135,7 @@
                 "nullable",
                 "string"
             ],
-            "sort": 7
+            "sort": 8
         }
     ]
 }
