@@ -17,7 +17,7 @@
         "Java 21": "ghcr.io/parkervcp/yolks:java_21"
     },
     "file_denylist": [],
-    "startup": "if [[ -d .git ]] && [[ {{AUTO_UPDATE}} == \"1\" ]]; then git pull; fi; cd {{APP_PROJECT_DIR}}; if [[ \"{{REBUILD}}\" == \"1\" ]] && [ -f pom.xml ]; then mvn clean package; fi; java {{JVM_FLAGS}} -Dterminal.jline=false -Dterminal.ansi=true -jar \"{{APP_FILE}}\"",
+    "startup": "if [[ -d .git ]] && [[ {{AUTO_UPDATE}} == \"1\" ]]; then git pull; fi; java {{JVM_FLAGS}} -Dterminal.jline=false -Dterminal.ansi=true -jar \"{{APP_FILE}}\"",
     "config": {
         "files": "{}",
         "startup": "{\n    \"done\": [\n        \"Started\",\n        \"Listening\"\n    ]\n}",
@@ -26,7 +26,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!/bin/bash\r\n# Java Application Installation Script\r\n#\r\n# Server Files: /mnt/server\r\napt update\r\napt install -y git curl jq file unzip make gcc g++ libtool maven\r\n\r\nmkdir -p /mnt/server\r\ncd /mnt/server\r\n\r\nif [ -n \"${GIT_ADDRESS}\" ]; then\r\n    ## add git ending if it's not on the address\r\n    if [[ \"${GIT_ADDRESS}\" != *.git ]]; then\r\n        GIT_ADDRESS=\"${GIT_ADDRESS}.git\"\r\n    fi\r\n\r\n    if [ -z \"${GIT_USERNAME}\" ] && [ -z \"${GIT_ACCESS_TOKEN}\" ]; then\r\n        echo -e \"using anon api call\"\r\n    else\r\n        GIT_ADDRESS=\"https://${GIT_USERNAME}:${GIT_ACCESS_TOKEN}@$(echo -e ${GIT_ADDRESS} | cut -d/ -f3-)\"\r\n    fi\r\n\r\n    ## pull git java repo\r\n    if [ \"$(ls -A /mnt/server)\" ]; then\r\n        echo -e \"/mnt/server directory is not empty.\"\r\n        if [ -d .git ]; then\r\n            echo -e \".git directory exists\"\r\n            if [ -f .git/config ]; then\r\n                echo -e \"loading info from git config\"\r\n                ORIGIN=$(git config --get remote.origin.url)\r\n            else\r\n                echo -e \"files found with no git config\"\r\n                echo -e \"closing out without touching things to not break anything\"\r\n                exit 10\r\n            fi\r\n        fi\r\n\r\n        if [ \"${ORIGIN}\" == \"${GIT_ADDRESS}\" ]; then\r\n            echo \"pulling latest from github\"\r\n            git pull\r\n        fi\r\n    else\r\n        echo -e \"/mnt/server is empty.\\ncloning files into repo\"\r\n        if [ -z ${GIT_BRANCH} ]; then\r\n            echo -e \"cloning default branch\"\r\n            git clone ${GIT_ADDRESS} .\r\n        else\r\n            echo -e \"cloning ${GIT_BRANCH}'\"\r\n            git clone --single-branch --branch ${GIT_BRANCH} ${GIT_ADDRESS} .\r\n        fi\r\n    fi\r\nfi\r\n\r\ncd {{APP_PROJECT_DIR}}\r\nif [ -f pom.xml ]; then\r\n    echo \"pom.xml found, running mvn clean package...\"\r\n    mvn clean package\r\nfi\r\n\r\necho -e \"install complete\"\r\nexit 0",
+            "script": "#!/bin/bash\r\n# Java Application Installation Script\r\n#\r\n# Server Files: /mnt/server\r\napt update\r\napt install -y git curl jq file unzip make gcc g++ libtool maven apt-utils\r\n\r\nmkdir -p /mnt/server\r\ncd /mnt/server\r\n\r\nif [ -n \"${GIT_ADDRESS}\" ]; then\r\n    ## add git ending if it's not on the address\r\n    if [[ \"${GIT_ADDRESS}\" != *.git ]]; then\r\n        GIT_ADDRESS=\"${GIT_ADDRESS}.git\"\r\n    fi\r\n\r\n    if [ -z \"${GIT_USERNAME}\" ] && [ -z \"${GIT_ACCESS_TOKEN}\" ]; then\r\n        echo -e \"using anon api call\"\r\n    else\r\n        GIT_ADDRESS=\"https://${GIT_USERNAME}:${GIT_ACCESS_TOKEN}@$(echo -e ${GIT_ADDRESS} | cut -d/ -f3-)\"\r\n    fi\r\n\r\n    ## pull git java repo\r\n    if [ \"$(ls -A /mnt/server)\" ]; then\r\n        echo -e \"/mnt/server directory is not empty.\"\r\n        if [ -d .git ]; then\r\n            echo -e \".git directory exists\"\r\n            if [ -f .git/config ]; then\r\n                echo -e \"loading info from git config\"\r\n                ORIGIN=$(git config --get remote.origin.url)\r\n            else\r\n                echo -e \"files found with no git config\"\r\n                echo -e \"closing out without touching things to not break anything\"\r\n                exit 10\r\n            fi\r\n        fi\r\n\r\n        if [ \"${ORIGIN}\" == \"${GIT_ADDRESS}\" ]; then\r\n            echo \"pulling latest from github\"\r\n            git pull\r\n        fi\r\n    else\r\n        echo -e \"/mnt/server is empty.\\ncloning files into repo\"\r\n        if [ -z ${GIT_BRANCH} ]; then\r\n            echo -e \"cloning default branch\"\r\n            git clone ${GIT_ADDRESS} .\r\n        else\r\n            echo -e \"cloning ${GIT_BRANCH}'\"\r\n            git clone --single-branch --branch ${GIT_BRANCH} ${GIT_ADDRESS} .\r\n        fi\r\n    fi\r\nfi\r\n\r\necho -e \"install complete\"\r\nexit 0",
             "container": "ghcr.io/parkervcp/installers:debian",
             "entrypoint": "bash"
         }
@@ -47,19 +47,6 @@
             "sort": 1
         },
         {
-            "name": "Project Directory",
-            "description": "The directory where the project file is located.",
-            "env_variable": "APP_PROJECT_DIR",
-            "default_value": "/home/container",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": [
-                "required",
-                "string"
-            ],
-            "sort": 4
-        },
-        {
             "name": "JVM Flags",
             "description": "Custom JVM flags for the application.",
             "env_variable": "JVM_FLAGS",
@@ -71,19 +58,6 @@
                 "string"
             ],
             "sort": 2
-        },
-        {
-            "name": "Rebuild on Start",
-            "description": "Rebuild the application on every startup if a pom.xml is present.",
-            "env_variable": "REBUILD",
-            "default_value": "0",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": [
-                "required",
-                "boolean"
-            ],
-            "sort": 3
         },
         {
             "name": "Git Auto Update",
