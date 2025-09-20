@@ -17,7 +17,7 @@
         "Node.js 18": "ghcr.io/parkervcp/yolks:nodejs_18"
     },
     "file_denylist": [],
-    "startup": "if [[ -d .git ]] && [[ {{AUTO_UPDATE}} == \"1\" ]]; then git pull; fi; if [[ {{APP_FILE}} == *.js ]]; then /usr/local/bin/node \"/home/container/${APP_FILE}\"; else /usr/local/bin/ts-node --esm \"/home/container/${APP_FILE}\"; fi",
+    "startup": "if [[ -d .git ]] && [[ {{AUTO_UPDATE}} == \"1\" ]]; then git pull; fi; if [ -f package.json ]; then npm install --production; fi; if [[ {{APP_FILE}} == *.js ]]; then /usr/local/bin/node \"/home/container/${APP_FILE}\"; else /usr/local/bin/ts-node --esm \"/home/container/${APP_FILE}\"; fi",
     "config": {
         "files": "{}",
         "startup": "{\n    \"done\": [\n        \"Started\",\n        \"Listening\"\n    ]\n}",
