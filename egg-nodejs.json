@@ -41,7 +41,7 @@
             "rules": [
                 "required",
                 "string",
-                "max:16"
+                "max:64"
             ],
             "sort": 1
         },

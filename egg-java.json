@@ -46,6 +46,19 @@
             "sort": 1
         },
         {
+            "name": "Project Directory",
+            "description": "The directory where the project file is located.",
+            "env_variable": "APP_PROJECT_DIR",
+            "default_value": "/home/container",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": [
+                "required",
+                "string"
+            ],
+            "sort": 4
+        },
+        {
             "name": "JVM Flags",
             "description": "Custom JVM flags for the application.",
             "env_variable": "JVM_FLAGS",
@@ -82,7 +95,7 @@
                 "required",
                 "boolean"
             ],
-            "sort": 4
+            "sort": 5
         },
         {
             "name": "Git Repository Address",
@@ -95,7 +108,7 @@
                 "nullable",
                 "string"
             ],
-            "sort": 5
+            "sort": 6
         },
         {
             "name": "Git Branch",
@@ -108,7 +121,7 @@
                 "nullable",
                 "string"
             ],
-            "sort": 6
+            "sort": 7
         },
         {
             "name": "Git Username",
@@ -121,7 +134,7 @@
                 "nullable",
                 "string"
             ],
-            "sort": 7
+            "sort": 8
         },
         {
             "name": "Git Access Token",
@@ -134,7 +147,7 @@
                 "nullable",
                 "string"
             ],
-            "sort": 8
+            "sort": 9
         }
     ]
 }
