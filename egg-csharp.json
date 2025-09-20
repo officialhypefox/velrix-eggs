@@ -17,7 +17,7 @@
         "ghcr.io/parkervcp/yolks:dotnet_9": "ghcr.io/parkervcp/yolks:dotnet_9"
     },
     "file_denylist": [],
-    "startup": "if [[ -d .git ]] && [[ {{AUTO_UPDATE}} == \"1\" ]]; then git pull; fi; if [[ \"{{REBUILD}}\" == \"1\" ]]; then dotnet build --project {{APP_PROJECT_FILE}} -c Release; fi; dotnet run --project {{APP_PROJECT_FILE}} --no-build -c Release",
+    "startup": "if [[ -d .git ]] && [[ {{AUTO_UPDATE}} == \"1\" ]]; then git pull; fi; cd {{APP_PROJECT_DIR}}; if [[ \"{{REBUILD}}\" == \"1\" ]]; then dotnet build --project {{APP_PROJECT_FILE}} -c Release; fi; dotnet run --project {{APP_PROJECT_FILE}} --no-build -c Release",
     "config": {
         "files": "{}",
         "startup": "{\n    \"done\": [\n        \"Started\",\n        \"Listening\"\n    ]\n}",
@@ -26,7 +26,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!/bin/bash\r\n\r\napt update\r\napt install -y git curl jq file unzip\r\n\r\nmkdir -p /mnt/server\r\ncd /mnt/server\r\n\r\n## add git ending if it's not on the address\r\nif [[ ${GIT_ADDRESS} != *.git ]]; then\r\n    GIT_ADDRESS=${GIT_ADDRESS}.git\r\nfi\r\n\r\nif [ -z \"${USERNAME}\" ] && [ -z \"${ACCESS_TOKEN}\" ]; then\r\n    echo -e \"using anon api call\"\r\nelse\r\n    GIT_ADDRESS=\"https://${USERNAME}:${ACCESS_TOKEN}@$(echo -e ${GIT_ADDRESS} | cut -d/ -f3-)\"\r\nfi\r\n\r\n## pull git js bot repo\r\nif [ \"$(ls -A /mnt/server)\" ]; then\r\n    echo -e \"/mnt/server directory is not empty.\"\r\n    if [ -d .git ]; then\r\n        echo -e \".git directory exists\"\r\n        if [ -f .git/config ]; then\r\n            echo -e \"loading info from git config\"\r\n            ORIGIN=$(git config --get remote.origin.url)\r\n        else\r\n            echo -e \"files found with no git config\"\r\n            echo -e \"closing out without touching things to not break anything\"\r\n            exit 10\r\n        fi\r\n    fi\r\n\r\n    if [ \"${ORIGIN}\" == \"${GIT_ADDRESS}\" ]; then\r\n        echo \"pulling latest from github\"\r\n        git pull\r\n    fi\r\nelse\r\n    echo -e \"/mnt/server is empty.\\ncloning files into repo\"\r\n    if [ -z ${BRANCH} ]; then\r\n        echo -e \"cloning default branch\"\r\n        git clone ${GIT_ADDRESS} .\r\n    else\r\n        echo -e \"cloning ${BRANCH}'\"\r\n        git clone --single-branch --branch ${BRANCH} ${GIT_ADDRESS} .\r\n    fi\r\nfi\r\n\r\ndotnet build --project ${APP_PROJECT_FILE} -c Release\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
+            "script": "#!/bin/bash\r\n\r\napt update\r\napt install -y git curl jq file unzip make gcc g++ libtool\r\n\r\nmkdir -p /mnt/server\r\ncd /mnt/server\r\n\r\n## add git ending if it's not on the address\r\nif [[ ${GIT_ADDRESS} != *.git ]]; then\r\n    GIT_ADDRESS=${GIT_ADDRESS}.git\r\nfi\r\n\r\nif [ -z \"${GIT_USERNAME}\" ] && [ -z \"${GIT_ACCESS_TOKEN}\" ]; then\r\n    echo -e \"using anon api call\"\r\nelse\r\n    GIT_ADDRESS=\"https://${GIT_USERNAME}:${GIT_ACCESS_TOKEN}@$(echo -e ${GIT_ADDRESS} | cut -d/ -f3-)\"\r\nfi\r\n\r\n## pull git js bot repo\r\nif [ \"$(ls -A /mnt/server)\" ]; then\r\n    echo -e \"/mnt/server directory is not empty.\"\r\n    if [ -d .git ]; then\r\n        echo -e \".git directory exists\"\r\n        if [ -f .git/config ]; then\r\n            echo -e \"loading info from git config\"\r\n            ORIGIN=$(git config --get remote.origin.url)\r\n        else\r\n            echo -e \"files found with no git config\"\r\n            echo -e \"closing out without touching things to not break anything\"\r\n            exit 10\r\n        fi\r\n    fi\r\n\r\n    if [ \"${ORIGIN}\" == \"${GIT_ADDRESS}\" ]; then\r\n        echo \"pulling latest from github\"\r\n        git pull\r\n    fi\r\nelse\r\n    echo -e \"/mnt/server is empty.\\ncloning files into repo\"\r\n    if [ -z ${GIT_BRANCH} ]; then\r\n        echo -e \"cloning default branch\"\r\n        git clone ${GIT_ADDRESS} .\r\n    else\r\n        echo -e \"cloning ${GIT_BRANCH}'\"\r\n        git clone --single-branch --branch ${GIT_BRANCH} ${GIT_ADDRESS} .\r\n    fi\r\nfi\r\n\r\ncd {{APP_PROJECT_DIR}}\r\ndotnet build --project ${APP_PROJECT_FILE} -c Release\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
             "container": "ghcr.io/parkervcp/installers:debian",
             "entrypoint": "bash"
         }
@@ -73,6 +73,19 @@
             "sort": 3
         },
         {
+            "name": "Git Auto Update",
+            "description": "Automatically update the application by pulling the latest files from the Git repository on every startup.",
+            "env_variable": "AUTO_UPDATE",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": [
+                "required",
+                "boolean"
+            ],
+            "sort": 4
+        },
+        {
             "name": "Git Repository Address",
             "description": "The Git repository address to clone from.",
             "env_variable": "GIT_ADDRESS",
@@ -83,7 +96,7 @@
                 "nullable",
                 "string"
             ],
-            "sort": 4
+            "sort": 5
         },
         {
             "name": "Git Branch",
@@ -95,19 +108,6 @@
             "rules": [
                 "nullable",
                 "string"
-            ],
-            "sort": 5
-        },
-        {
-            "name": "Auto Update",
-            "description": "Automatically pull the latest files from the Git repository on startup.",
-            "env_variable": "AUTO_UPDATE",
-            "default_value": "0",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": [
-                "required",
-                "boolean"
             ],
             "sort": 6
         },

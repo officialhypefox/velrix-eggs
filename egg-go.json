@@ -73,6 +73,19 @@
             "sort": 3
         },
         {
+            "name": "Git Auto Update",
+            "description": "Automatically update the application by pulling the latest files from the Git repository on every startup.",
+            "env_variable": "AUTO_UPDATE",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": [
+                "required",
+                "boolean"
+            ],
+            "sort": 4
+        },
+        {
             "name": "Git Repository Address",
             "description": "The Git repository address to clone from.",
             "env_variable": "GIT_ADDRESS",
@@ -83,7 +96,7 @@
                 "nullable",
                 "string"
             ],
-            "sort": 4
+            "sort": 5
         },
         {
             "name": "Git Branch",
@@ -95,19 +108,6 @@
             "rules": [
                 "nullable",
                 "string"
-            ],
-            "sort": 5
-        },
-        {
-            "name": "Auto Update",
-            "description": "Automatically pull the latest files from the Git repository on startup.",
-            "env_variable": "AUTO_UPDATE",
-            "default_value": "0",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": [
-                "required",
-                "boolean"
             ],
             "sort": 6
         },
