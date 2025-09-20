@@ -63,7 +63,7 @@
             "name": "Rebuild on Start",
             "description": "Rebuild the application on every startup.",
             "env_variable": "REBUILD",
-            "default_value": "1",
+            "default_value": "0",
             "user_viewable": true,
             "user_editable": true,
             "rules": [
