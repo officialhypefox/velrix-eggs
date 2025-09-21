@@ -17,7 +17,7 @@
         "Node.js 18": "ghcr.io/parkervcp/yolks:nodejs_18"
     },
     "file_denylist": [],
-    "startup": "if [[ -d .git ]] && [[ {{AUTO_UPDATE}} == \"1\" ]]; then git pull; fi; if [ -f package.json ]; then npm install; fi; npx tsx {{APP_FILE}}",
+    "startup": "if [[ -d .git ]] && [[ {{AUTO_UPDATE}} == \"1\" ]]; then git pull; fi; if [ -f package.json ]; then npm install; fi; npm i tsx@latest --no-save &> /dev/null; npx tsx {{APP_FILE}}",
     "config": {
         "files": "{}",
         "startup": "{\n    \"done\": [\n        \"Started\",\n        \"Listening\"\n    ]\n}",
