@@ -8,7 +8,7 @@
     "name": "Rust",
     "author": "contact@velrix.net",
     "uuid": "46a0d309-4e45-4475-ab2a-7e4a965fe410",
-    "description": "A modern systems language focused on memory safety and performance, popular for building reliable, high-performance applications.",
+    "description": "A systems programming language focused on safety, speed, and concurrency.",
     "tags": [],
     "features": [],
     "docker_images": {
@@ -34,7 +34,7 @@
             "name": "Executable Name",
             "description": "The name of the compiled executable file.",
             "env_variable": "EXECUTABLE_NAME",
-            "default_value": "app",
+            "default_value": "main",
             "user_viewable": true,
             "user_editable": true,
             "rules": [

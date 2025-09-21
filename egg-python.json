@@ -8,7 +8,7 @@
     "name": "Python",
     "author": "contact@velrix.net",
     "uuid": "cbd15054-262b-4183-82e9-462c3894175b",
-    "description": "A flexible language with clean syntax, used everywhere from web apps to data science, automation, and artificial intelligence.",
+    "description": "A high-level, general-purpose programming language.",
     "tags": [],
     "features": [],
     "docker_images": {
@@ -34,10 +34,10 @@
     },
     "variables": [
         {
-            "name": "App Python File",
+            "name": "Main Python File",
             "description": "The main file to run for your application.",
             "env_variable": "APP_FILE",
-            "default_value": "app.py",
+            "default_value": "main.py",
             "user_viewable": true,
             "user_editable": true,
             "rules": [

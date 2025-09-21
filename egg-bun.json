@@ -8,7 +8,7 @@
     "name": "Bun",
     "author": "contact@velrix.net",
     "uuid": "b62c6de5-7034-4853-970f-ed5b57c5083b",
-    "description": "A new JavaScript runtime focused on speed, with built-in tools like a package manager, bundler, and test runner for modern development.",
+    "description": "A fast JavaScript all-in-one toolkit.",
     "tags": [],
     "features": [],
     "docker_images": {

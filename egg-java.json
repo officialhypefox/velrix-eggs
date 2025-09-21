@@ -8,7 +8,7 @@
     "name": "Java",
     "author": "contact@velrix.net",
     "uuid": "a3ff6992-6e87-42b8-b8ca-cde33f38a435",
-    "description": "A mature, versatile language known for reliability and cross-platform performance, widely used in enterprise systems, Android apps, and backend services.",
+    "description": "A class-based, object-oriented programming language that is designed to have as few implementation dependencies as possible.",
     "tags": [],
     "features": [],
     "docker_images": {
@@ -36,7 +36,7 @@
             "name": "JAR File",
             "description": "The JAR file to run for your application.",
             "env_variable": "APP_FILE",
-            "default_value": "app.jar",
+            "default_value": "main.jar",
             "user_viewable": true,
             "user_editable": true,
             "rules": [

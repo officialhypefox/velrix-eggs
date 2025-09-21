@@ -8,7 +8,7 @@
     "name": "Go",
     "author": "contact@velrix.net",
     "uuid": "b1c18867-5be4-4124-9ce2-8924339de747",
-    "description": "Designed by Google, Go is fast, simple, and efficient—perfect for scalable services, cloud infrastructure, and modern networking tools.",
+    "description": "A statically typed, compiled programming language designed at Google.",
     "tags": [],
     "features": [],
     "docker_images": {
@@ -36,7 +36,7 @@
             "name": "Executable Name",
             "description": "The name of the compiled executable file.",
             "env_variable": "EXECUTABLE_NAME",
-            "default_value": "app",
+            "default_value": "main",
             "user_viewable": true,
             "user_editable": true,
             "rules": [
