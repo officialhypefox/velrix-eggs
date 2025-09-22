@@ -17,7 +17,7 @@
         "Java 11": "ghcr.io/parkervcp/yolks:java_11"
     },
     "file_denylist": [],
-    "startup": "if [[ -d .git ]] && [[ {{AUTO_UPDATE}} == \"1\" ]]; then git pull; fi; java {{JVM_FLAGS}} -Dterminal.jline=false -Dterminal.ansi=true -jar \"{{APP_FILE}}\"",
+    "startup": "if [[ -d .git ]] && [[ \"{{AUTO_UPDATE}}\" == \"1\" ]]; then git pull; fi; if [[ -n \"{{APP_FILE}}\" ]]; then if [[ -f \"{{APP_FILE}}\" ]]; then java {{JVM_FLAGS}} -Dterminal.jline=false -Dterminal.ansi=true -jar \"{{APP_FILE}}\"; else echo \"JAR file '{{APP_FILE}}' not found. Please ensure it exists.\"; fi; else echo \"APP_FILE is not set. Please set it to your main JAR file.\"; fi",
     "config": {
         "files": "{}",
         "startup": "{\n    \"done\": [\n        \"Started\",\n        \"Listening\"\n    ]\n}",

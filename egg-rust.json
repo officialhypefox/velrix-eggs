@@ -15,7 +15,7 @@
         "Rust Latest": "ghcr.io/parkervcp/yolks:rust_latest"
     },
     "file_denylist": [],
-    "startup": "if [[ -d .git ]] && [[ {{AUTO_UPDATE}} == \"1\" ]]; then git pull; fi; chmod +x {{EXECUTABLE_NAME}}; ./{{EXECUTABLE_NAME}}",
+    "startup": "if [[ -d .git ]] && [[ \"{{AUTO_UPDATE}}\" == \"1\" ]]; then git pull; fi; if [[ -n \"{{EXECUTABLE_NAME}}\" ]]; then if [[ -f \"{{EXECUTABLE_NAME}}\" ]]; then chmod +x \"{{EXECUTABLE_NAME}}\" && .\/\"{{EXECUTABLE_NAME}}\"; else echo \"Executable '{{EXECUTABLE_NAME}}' not found. Please ensure it has been compiled.\"; fi; else echo \"EXECUTABLE_NAME is not set. Please set it to your compiled executable file.\"; fi",
     "config": {
         "files": "{}",
         "startup": "{\n    \"done\": [\n        \"Started\",\n        \"Listening\"\n    ]\n}",
