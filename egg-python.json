@@ -18,7 +18,7 @@
         "Python 3.10": "ghcr.io/parkervcp/yolks:python_3.10"
     },
     "file_denylist": [],
-    "startup": "export PATH=/home/container/.local/bin:$PATH; if [[ -d .git ]] && [[ \"{{AUTO_UPDATE}}\" == \"1\" ]]; then git pull; fi; if [ -f {{REQUIREMENTS_FILE}} ]; then pip install --user -U -r {{REQUIREMENTS_FILE}}; fi; /usr/local/bin/python /home/container/{{APP_FILE}}",
+    "startup": "export PATH=/home/container/.local/bin:$PATH; if [[ -d .git ]] && [[ \"{{AUTO_UPDATE}}\" == \"1\" ]]; then git pull; fi; if [[ -n \"{{REQUIREMENTS_FILE}}\" ]] && [[ -f \"{{REQUIREMENTS_FILE}}\" ]]; then pip install --user -U -r \"{{REQUIREMENTS_FILE}}\"; fi; if [[ -n \"{{APP_FILE}}\" ]]; then /usr/local/bin/python /home/container/\"{{APP_FILE}}\"; else echo \"No python file to run, please check APP_FILE variable\"; fi",
     "config": {
         "files": "{}",
         "startup": "{\n    \"done\": [\n        \"Started\",\n        \"Listening\"\n    ]\n}",
