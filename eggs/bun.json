@@ -1,0 +1,95 @@
+{
+  "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PANEL",
+  "meta": {
+    "version": "PLCN_v2",
+    "update_url": "https://raw.githubusercontent.com/officialhypefox/velrix-eggs/refs/heads/main/eggs/bun.json"
+  },
+  "exported_at": "2025-11-17T05:52:18+00:00",
+  "name": "Bun",
+  "author": "contact@velrix.net",
+  "uuid": "b62c6de5-7034-4853-970f-ed5b57c5083b",
+  "description": "A fast JavaScript all-in-one toolkit.",
+  "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxZW0iIGhlaWdodD0iMWVtIiB2aWV3Qm94PSIwIDAgMjU2IDI1NiI+PGcgZmlsbD0ibm9uZSI+PHJlY3Qgd2lkdGg9IjI1NiIgaGVpZ2h0PSIyNTYiIGZpbGw9IiMyNDI5MzgiIHJ4PSI2MCIvPjxwYXRoIGZpbGw9IiMwMDAiIGQ9Ik0yMDYuNzA5IDkxLjI0MWMtLjQwNS0uNDMtLjgzNi0uODYtMS4yNjYtMS4yNjZjLS40MzEtLjQwNS0uODM2LS44Ni0xLjI2Ni0xLjI2NWMtLjQzLS40MDYtLjgzNS0uODYxLTEuMjY2LTEuMjY2Yy0uNDMtLjQwNS0uODM1LS44NjEtMS4yNjYtMS4yNjZjLS40My0uNDA1LS44MzUtLjg2LTEuMjY1LTEuMjY2Yy0uNDMxLS40MDUtLjgzNi0uODYtMS4yNjYtMS4yNjZjLS40MzEtLjQwNS0uODM2LS44Ni0xLjI2Ni0xLjI2NmE2NyA2NyAwIDAgMSAyMC4wMjUgNDYuNzM1YzAgNDEuOTQ5LTQyLjU4MiA3Ni4wNzYtOTQuOTM3IDc2LjA3NmMtMjkuMzE2IDAtNTUuNTQ0LTEwLjcwOS03Mi45ODctMjcuNDk0bDEuMjY2IDEuMjY2bDEuMjY2IDEuMjY2bDEuMjY1IDEuMjY1bDEuMjY2IDEuMjY2bDEuMjY2IDEuMjY2bDEuMjY2IDEuMjY2bDEuMjY2IDEuMjY2YzE3LjQxOCAxNy40OTMgNDQuMjI4IDI4Ljc1OSA3NC4yNTMgMjguNzU5YzUyLjM1NCAwIDk0LjkzNy0zNC4xMjYgOTQuOTM3LTc1Ljk0OWMwLTE3Ljg3NC03LjY5Ni0zNC44MS0yMS4yOTEtNDguMTI3Ii8+PHBhdGggZmlsbD0iI0ZCRjBERiIgZD0iTTIxMS41NDQgMTI5LjExNGMwIDM4LjUwNi0zOS42NyA2OS43MjItODguNjA3IDY5LjcyMnMtODguNjA4LTMxLjIxNi04OC42MDgtNjkuNzIyYzAtMjMuODczIDE1LjE5LTQ0Ljk2MiAzOC41MzItNTcuNDY4czM3Ljg3My0yNS4zMTcgNTAuMDc2LTI1LjMxN2MxMi4yMDIgMCAyMi42MzMgMTAuNDU2IDUwLjA3NiAyNS4zMTdjMjMuMzQyIDEyLjUwNiAzOC41MzEgMzMuNTk1IDM4LjUzMSA1Ny40NjgiLz48cGF0aCBmaWxsPSIjRjZERUNFIiBkPSJNMjExLjU0NCAxMjkuMTE0YTU0LjggNTQuOCAwIDAgMC0yLjAyNS0xNC42MzNjLTYuOTExIDg0LjMwNC0xMDkuNzQ3IDg4LjM1NC0xNTAuMTc3IDYzLjEzOWExMDEuMjcgMTAxLjI3IDAgMCAwIDYzLjU5NSAyMS4yMTVjNDguODYxIDAgODguNjA3LTMxLjI2NSA4OC42MDctNjkuNzIxIi8+PHBhdGggZmlsbD0iI0ZGRkVGQyIgZD0iTTg4LjgzNiA2Ny4wMTNjMTEuMzE2LTYuNzg1IDI2LjM1NC0xOS41MiA0MS4xMzktMTkuNTQ1YTIzLjUgMjMuNSAwIDAgMC03LjAzOC0xLjEzOWMtNi4xMjcgMC0xMi42NTggMy4xNjUtMjAuODg2IDcuOTI0Yy0yLjg2MSAxLjY3MS01LjgyMyAzLjUyLTguOTYyIDUuNDQzYy01LjkgMy42NDYtMTIuNjU5IDcuNzcyLTIwLjI1NCAxMS44OTljLTI0LjEgMTMuMDM4LTM4LjUwNiAzNC41MzItMzguNTA2IDU3LjUxOXYzLjAxM2MxNS4zNDItNTQuMjAzIDQzLjIxNS01OC4zMyA1NC41MDYtNjUuMTE0Ii8+PHBhdGggZmlsbD0iI0NDQkVBNyIgZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNMTE1LjY0NSA1Mi43MzRhNDEuNTMgNDEuNTMgMCAwIDEtMTQuMjUzIDMxLjU3Yy0uNzA5LjYzMy0uMTUyIDEuODQ4Ljc2IDEuNDkzYzguNTMxLTMuMzE2IDIwLjA1LTEzLjI0IDE1LjE5LTMzLjI2NWMtLjIwMy0xLjE0LTEuNjk3LS44MzYtMS42OTcuMjAybTUuNzQ3IDBhNDEuMTIgNDEuMTIgMCAwIDEgNC4wNzYgMzQuMTAxYy0uMzA0Ljg4Ny43ODUgMS42NDYgMS4zOTMuOTEyYzUuNTQ0LTcuMDg5IDEwLjM3OS0yMS4xNjUtNC4xMDItMzYuMzU1Yy0uNzM0LS42NTgtMS44NzMuMzU1LTEuMzY3IDEuMjR6bTYuOTg4LS40M2E0MS41NiA0MS41NiAwIDAgMSAxNy4zNDEgMjkuNzcyYS44MzcuODM3IDAgMCAwIDEuNjQ2LjI3OGMyLjMyOS04LjgzNSAxLjAxMy0yMy44OTgtMTguMTUyLTMxLjcyMWMtMS4wMTMtLjQwNS0xLjY3MS45NjItLjgzNSAxLjU3ek04MS42NDUgNzguNjMzYTQyLjkgNDIuOSAwIDAgMCAyNi41MDctMjIuNzg1Yy40NTUtLjkxMSAxLjg5OS0uNTU3IDEuNjcxLjQ1NmMtNC4zOCAyMC4yNTMtMTkuMDM4IDI0LjQ4LTI4LjE1MiAyMy45MjRjLS45NjIuMDI1LS45MzctMS4zMTctLjAyNi0xLjU5NSIgY2xpcC1ydWxlPSJldmVub2RkIi8+PHBhdGggZmlsbD0iIzAwMCIgZD0iTTEyMi45MzcgMjA1LjE5QzcwLjU4MiAyMDUuMTkgMjggMTcxLjA2MyAyOCAxMjkuMTE0YzAtMjUuMzE2IDE1LjY0Ni00OC45MzcgNDEuODQ4LTYzLjA4OWM3LjU5NS00LjA1IDE0LjEwMS04LjEyNiAxOS44OTktMTEuNjk2YTUzMCA1MzAgMCAwIDEgOS4xMTQtNS41NDRDMTA3Ljc0NyA0My41MTkgMTE1LjM0MiA0MCAxMjIuOTM3IDQwczE0LjIyOCAzLjAzOCAyMi41MzEgNy45NWMyLjUzMiAxLjQ0MiA1LjA2NCAzLjAxMiA3Ljc3MyA0LjczNGM2LjMwMyAzLjg5OCAxMy40MTcgOC4zMDMgMjIuNzg0IDEzLjM0MWMyNi4yMDMgMTQuMTUyIDQxLjg0OSAzNy43NDcgNDEuODQ5IDYzLjA4OWMwIDQxLjk0OS00Mi41ODMgNzYuMDc2LTk0LjkzNyA3Ni4wNzZtMC0xNTguODZjLTYuMTI3IDAtMTIuNjU4IDMuMTY0LTIwLjg4NiA3LjkyM2MtMi44NjEgMS42NzEtNS44MjMgMy41Mi04Ljk2MiA1LjQ0M2MtNS45IDMuNjQ2LTEyLjY1OSA3Ljc3Mi0yMC4yNTQgMTEuODk5Yy0yNC4xIDEzLjAzOC0zOC41MDYgMzQuNTMyLTM4LjUwNiA1Ny41MTljMCAzOC40NTYgMzkuNzQ3IDY5Ljc0NyA4OC42MDggNjkuNzQ3czg4LjYwNy0zMS4yOTEgODguNjA3LTY5Ljc0N2MwLTIyLjk4Ny0xNC40MDUtNDQuNDgxLTM4LjUzMS01Ny40NjhjLTkuNTctNS4wNjQtMTcuMDM4LTkuODIzLTIzLjA4OS0xMy41N2MtMi43NTktMS42OTYtNS4yOTEtMy4yNjYtNy41OTUtNC42NThjLTcuNjcxLTQuNTU3LTEzLjI2Ni03LjA4OS0xOS4zOTItNy4wODkiLz48cGF0aCBmaWxsPSIjQjcxNDIyIiBkPSJNMTQwLjc4NSAxNDcuNTk2YTIyLjYgMjIuNiAwIDAgMS03LjM5MiAxMS45MjRhMTcuMjQgMTcuMjQgMCAwIDEtMTAuMTI3IDQuNzU5YTE3LjMgMTcuMyAwIDAgMS0xMC40NTYtNC43NTlhMjIuNiAyMi42IDAgMCAxLTcuMjkxLTExLjkyNGExLjgyIDEuODIgMCAwIDEgLjUxLTEuNTIyYTEuODIgMS44MiAwIDAgMSAxLjUxNS0uNTI5aDMxLjI0MWExLjgyIDEuODIgMCAwIDEgMS40OTguNTRhMS44MyAxLjgzIDAgMCAxIC41MDIgMS41MTEiLz48cGF0aCBmaWxsPSIjRkY2MTY0IiBkPSJNMTEyLjgxIDE1OS43MjJhMTcuNSAxNy41IDAgMCAwIDEwLjQzMSA0LjgxYTE3LjUgMTcuNSAwIDAgMCAxMC40MDUtNC44MWEyNyAyNyAwIDAgMCAyLjUzMS0yLjcwOWExNy4yNyAxNy4yNyAwIDAgMC0xMi40MDUtNS44NDhhMTUuNTYgMTUuNTYgMCAwIDAtMTIuNjU4IDcuMDM4Yy41ODIuNTMxIDEuMDg5IDEuMDM4IDEuNjk2IDEuNTE5Ii8+PHBhdGggZmlsbD0iIzAwMCIgZD0iTTExMy4yMTUgMTU3LjcyMmExMy41NyAxMy41NyAwIDAgMSAxMC42MDgtNS4yNjZhMTUuMiAxNS4yIDAgMCAxIDEwLjEyNyA0LjI3OGE0MCA0MCAwIDAgMCAxLjY3LTEuOTQ5YTE3LjcyIDE3LjcyIDAgMCAwLTExLjkyNC00Ljg4NmExNi4xIDE2LjEgMCAwIDAtMTIuMzc5IDUuOTc1cS44OTguOTc2IDEuODk4IDEuODQ4Ii8+PHBhdGggZmlsbD0iIzAwMCIgZD0iTTEyMy4xNjUgMTY1Ljc5OGExOC44IDE4LjggMCAwIDEtMTEuMjY2LTUuMDY0YTI0LjEgMjQuMSAwIDAgMS03Ljg3My0xMi43ODRhMy4wNCAzLjA0IDAgMCAxIC42NTgtMi41MzJhMy41NyAzLjU3IDAgMCAxIDIuODYxLTEuMjkxaDMxLjI0YTMuNjQgMy42NCAwIDAgMSAyLjg2MSAxLjI5MWEzLjAyIDMuMDIgMCAwIDEgLjYzMyAyLjUzMmEyNC4xIDI0LjEgMCAwIDEtNy44NzQgMTIuNzg0YTE4Ljc4IDE4Ljc4IDAgMCAxLTExLjI0IDUuMDY0bS0xNS42Mi0xOC43MzVjLS40MDYgMC0uNTA3LjE3OC0uNTMyLjIyOGEyMSAyMSAwIDAgMCA2LjkxMSAxMS4wNjRhMTUuNzcgMTUuNzcgMCAwIDAgOS4yNDEgNC40M2ExNS45IDE1LjkgMCAwIDAgOS4yNC00LjM4YTIxIDIxIDAgMCAwIDYuODg2LTExLjA2M2EuNTMuNTMgMCAwIDAtLjUwNi0uMjI4eiIvPjxwYXRoIGZpbGw9IiNGRUJCRDAiIGQ9Ik0xNjEuNDY5IDE0OS4xNjRjOC4xNzkgMCAxNC44MS0zLjg5OSAxNC44MS04LjcwOXMtNi42MzEtOC43MDgtMTQuODEtOC43MDhzLTE0LjgxIDMuODk5LTE0LjgxIDguNzA4czYuNjMgOC43MDkgMTQuODEgOC43MDltLTc2LjYzMyAwYzguMTggMCAxNC44MS0zLjg5OSAxNC44MS04LjcwOXMtNi42My04LjcwOC0xNC44MS04LjcwOHMtMTQuODEgMy44OTktMTQuODEgOC43MDhzNi42MyA4LjcwOSAxNC44MSA4LjcwOSIvPjxwYXRoIGZpbGw9IiMwMDAiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTkxLjc5OCAxMzYuOTYyYTEzLjk0OCAxMy45NDggMCAwIDAgMTMuNzEtMTYuNjU1YTEzLjk1IDEzLjk1IDAgMSAwLTEzLjcxIDE2LjY1NW02Mi43MDkgMGExMy45NSAxMy45NSAwIDAgMCAxMi45NTktOC41NDFhMTMuOTQ5IDEzLjk0OSAwIDEgMC0yNi44MDctNS40MDlhMTMuOTIgMTMuOTIgMCAwIDAgMTMuODQ4IDEzLjk1IiBjbGlwLXJ1bGU9ImV2ZW5vZGQiLz48cGF0aCBmaWxsPSIjZmZmIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik04Ny40OTQgMTIzLjg5OGE1LjI0MyA1LjI0MyAwIDAgMCAzLjc0LTguOTM3YTUuMjQxIDUuMjQxIDAgMSAwLTMuNzQgOC45MzdtNjIuNzA5IDBhNS4yNSA1LjI1IDAgMCAwIDQuODYtMy4yMTdhNS4yNSA1LjI1IDAgMCAwLTEuMTItNS43MmE1LjI0MyA1LjI0MyAwIDAgMC04LjA3Ljc4M2E1LjI0IDUuMjQgMCAwIDAgLjYyMyA2LjU5M2E1LjI0IDUuMjQgMCAwIDAgMy42NTYgMS41NjF6IiBjbGlwLXJ1bGU9ImV2ZW5vZGQiLz48L2c+PC9zdmc+",
+  "tags": [],
+  "features": [],
+  "docker_images": {
+    "Bun Latest": "ghcr.io/parkervcp/yolks:bun_latest"
+  },
+  "file_denylist": [],
+  "startup": "export PATH=/home/container/node_modules/.bin:$PATH; if [[ -d .git ]] && [[ \"{{AUTO_UPDATE}}\" == \"1\" ]]; then git pull; fi; if [ -f package.json ]; then bun install; fi; if [[ -n \"{{APP_FILE}}\" ]]; then bun run \"{{APP_FILE}}\"; else echo \"APP_FILE is not set. Please set it to your main application file.\"; fi",
+  "config": {
+    "files": "{}",
+    "startup": "{\n    \"done\": [\n        \"Started\",\n        \"Listening\"\n    ]\n}",
+    "logs": "{}",
+    "stop": "^C"
+  },
+  "scripts": {
+    "installation": {
+      "script": "#!/bin/bash\r\n# Bun App Installation Script\r\n#\r\n# Server Files: /mnt/server\r\n\r\n# Install only essential packages\r\napt update\r\napt install -y git curl unzip\r\n\r\nmkdir -p /mnt/server\r\ncd /mnt/server\r\n\r\nif [ -n \"${GIT_ADDRESS}\" ]; then\r\n    ## add git ending if it's not on the address\r\n    if [[ \"${GIT_ADDRESS}\" != *.git ]]; then\r\n        GIT_ADDRESS=\"${GIT_ADDRESS}.git\"\r\n    fi\r\n\r\n    if [ -z \"${GIT_USERNAME}\" ] && [ -z \"${GIT_ACCESS_TOKEN}\" ]; then\r\n        echo -e \"using anon api call\"\r\n    else\r\n        GIT_ADDRESS=\"https://${GIT_USERNAME}:${GIT_ACCESS_TOKEN}@$(echo -e ${GIT_ADDRESS} | cut -d/ -f3-)\"\r\n    fi\r\n\r\n    ## pull git js bot repo\r\n    if [ \"$(ls -A /mnt/server)\" ]; then\r\n        echo -e \"/mnt/server directory is not empty.\"\r\n        if [ -d .git ]; then\r\n            echo -e \".git directory exists\"\r\n            if [ -f .git/config ]; then\r\n                echo -e \"loading info from git config\"\r\n                ORIGIN=$(git config --get remote.origin.url)\r\n            else\r\n                echo -e \"files found with no git config\"\r\n                echo -e \"closing out without touching things to not break anything\"\r\n                exit 10\r\n            fi\r\n        fi\r\n\r\n        if [ \"${ORIGIN}\" == \"${GIT_ADDRESS}\" ]; then\r\n            echo \"pulling latest from github\"\r\n            git pull\r\n        fi\r\n    else\r\n        echo -e \"/mnt/server is empty.\\ncloning files into repo\"\r\n        if [ -z ${GIT_BRANCH} ]; then\r\n            echo -e \"cloning default branch\"\r\n            git clone ${GIT_ADDRESS} .\r\n        else\r\n            echo -e \"cloning ${GIT_BRANCH}'\"\r\n            git clone --single-branch --branch ${GIT_BRANCH} ${GIT_ADDRESS} .\r\n        fi\r\n    fi\r\nfi\r\n\r\necho \"Installing dependencies from package.json\"\r\nif [ -f /mnt/server/package.json ]; then\r\n    bun install --production\r\nfi\r\n\r\necho -e \"install complete\"\r\nexit 0",
+      "container": "ghcr.io/parkervcp/installers:debian",
+      "entrypoint": "bash"
+    }
+  },
+  "variables": [
+    {
+      "name": "Main File",
+      "description": "The main file to run for your application.",
+      "env_variable": "APP_FILE",
+      "default_value": "index.js",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": ["required", "string"],
+      "sort": 1
+    },
+    {
+      "name": "Git Auto Update",
+      "description": "Automatically update the application by pulling the latest files from the Git repository on every startup.",
+      "env_variable": "AUTO_UPDATE",
+      "default_value": "0",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": ["required", "boolean"],
+      "sort": 2
+    },
+    {
+      "name": "Git Repository Address",
+      "description": "The Git repository address to clone from.",
+      "env_variable": "GIT_ADDRESS",
+      "default_value": "",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": ["nullable", "string"],
+      "sort": 3
+    },
+    {
+      "name": "Git Branch",
+      "description": "The Git branch to clone from.",
+      "env_variable": "GIT_BRANCH",
+      "default_value": "",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": ["nullable", "string"],
+      "sort": 4
+    },
+    {
+      "name": "Git Username",
+      "description": "The Git username for authentication, if required.",
+      "env_variable": "GIT_USERNAME",
+      "default_value": "",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": ["nullable", "string"],
+      "sort": 5
+    },
+    {
+      "name": "Git Access Token",
+      "description": "The Git access token for authentication, if required.",
+      "env_variable": "GIT_ACCESS_TOKEN",
+      "default_value": "",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": ["nullable", "string"],
+      "sort": 6
+    }
+  ]
+}

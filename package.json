@@ -1,0 +1,23 @@
+{
+  "name": "velrix-eggs",
+  "version": "1.0.0",
+  "description": "Pterodactyl eggs with automated icon management",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "update-icons": "bun run src/update-icons.ts",
+    "type-check": "tsc --noEmit"
+  },
+  "keywords": [
+    "pterodactyl",
+    "eggs",
+    "icons"
+  ],
+  "author": "contact@velrix.net",
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  }
+}

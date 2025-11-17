@@ -1,0 +1,26 @@
+{
+  "python.json": {
+    "url": "https://api.iconify.design/skill-icons:python-dark.svg",
+    "name": "Python"
+  },
+  "bun.json": {
+    "url": "https://api.iconify.design/skill-icons:bun-dark.svg",
+    "name": "Bun"
+  },
+  "go.json": {
+    "url": "https://api.iconify.design/skill-icons:golang.svg",
+    "name": "Go"
+  },
+  "java.json": {
+    "url": "https://api.iconify.design/skill-icons:java-dark.svg",
+    "name": "Java"
+  },
+  "nodejs.json": {
+    "url": "https://api.iconify.design/skill-icons:nodejs-dark.svg",
+    "name": "Node"
+  },
+  "rust.json": {
+    "url": "https://api.iconify.design/skill-icons:rust.svg",
+    "name": "Rust"
+  }
+}

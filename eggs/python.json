@@ -1,0 +1,109 @@
+{
+  "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PANEL",
+  "meta": {
+    "version": "PLCN_v2",
+    "update_url": "https://raw.githubusercontent.com/officialhypefox/velrix-eggs/refs/heads/main/eggs/python.json"
+  },
+  "exported_at": "2025-11-17T05:52:18+00:00",
+  "name": "Python",
+  "author": "contact@velrix.net",
+  "uuid": "cbd15054-262b-4183-82e9-462c3894175b",
+  "description": "A high-level, general-purpose programming language.",
+  "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxZW0iIGhlaWdodD0iMWVtIiB2aWV3Qm94PSIwIDAgMjU2IDI1NiI+PGcgZmlsbD0ibm9uZSI+PHJlY3Qgd2lkdGg9IjI1NiIgaGVpZ2h0PSIyNTYiIGZpbGw9IiMyNDI5MzgiIHJ4PSI2MCIvPjxwYXRoIGZpbGw9InVybCgjU1ZHUXA3OEplVEwpIiBkPSJNMTI3LjI3OSAyOWMtNTAuNzcyIDAtNDcuNjAyIDIyLjAxOC00Ny42MDIgMjIuMDE4bC4wNTcgMjIuODFoNDguNDUxdjYuODVINjAuNDg5UzI4IDc2Ljk5MiAyOCAxMjguMjIxczI4LjM1NyA0OS40MTQgMjguMzU3IDQ5LjQxNGgxNi45MjR2LTIzLjc3M3MtLjkxMi0yOC4zNTcgMjcuOTA1LTI4LjM1N2g0OC4wNTRzMjYuOTk5LjQzNiAyNi45OTktMjYuMDk0VjU1LjU0NlMxODAuMzM4IDI5IDEyNy4yNzkgMjltLTI2LjcxNiAxNS4zMzlhOC43MSA4LjcxIDAgMCAxIDguNzE3IDguNzE3YTguNzEgOC43MSAwIDAgMS04LjcxNyA4LjcxNmE4LjcxIDguNzEgMCAwIDEtOC43MTYtOC43MTZhOC43MSA4LjcxIDAgMCAxIDguNzE2LTguNzE3Ii8+PHBhdGggZmlsbD0idXJsKCNTVkdUZlAwMGJSZSkiIGQ9Ik0xMjguNzIxIDIyNy45NThjNTAuNzcyIDAgNDcuNjAyLTIyLjAxNyA0Ny42MDItMjIuMDE3bC0uMDU3LTIyLjgxMWgtNDguNDUxdi02Ljg0OWg2Ny42OTZTMjI4IDE3OS45NjYgMjI4IDEyOC43MzZzLTI4LjM1Ny00OS40MTMtMjguMzU3LTQ5LjQxM2gtMTYuOTI0djIzLjc3M3MuOTEyIDI4LjM1Ny0yNy45MDUgMjguMzU3SDEwNi43NnMtMjctLjQzNy0yNyAyNi4wOTN2NDMuODY2cy00LjA5OSAyNi41NDYgNDguOTYxIDI2LjU0Nm0yNi43MTYtMTUuMzM5YTguNzEgOC43MSAwIDAgMS04LjcxNy04LjcxNmE4LjcxIDguNzEgMCAwIDEgOC43MTctOC43MTdhOC43MSA4LjcxIDAgMCAxIDguNzE3IDguNzE3YTguNzEgOC43MSAwIDAgMS04LjcxNyA4LjcxNiIvPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iU1ZHUXA3OEplVEwiIHgxPSI0Ny4yMiIgeDI9IjE0Ni4zMzMiIHkxPSI0Ni44OTYiIHkyPSIxNDUuMDIiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBzdG9wLWNvbG9yPSIjMzg3RUI4Ii8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMzY2OTk0Ii8+PC9saW5lYXJHcmFkaWVudD48bGluZWFyR3JhZGllbnQgaWQ9IlNWR1RmUDAwYlJlIiB4MT0iMTA4LjA1NiIgeDI9IjIxNC40OTIiIHkxPSIxMDkuOTA1IiB5Mj0iMjEwLjUyMiIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIHN0b3AtY29sb3I9IiNGRkUwNTIiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNGRkMzMzEiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48L2c+PC9zdmc+",
+  "tags": [],
+  "features": [],
+  "docker_images": {
+    "Python 3.14": "ghcr.io/parkervcp/yolks:python_3.14",
+    "Python 3.13": "ghcr.io/parkervcp/yolks:python_3.13",
+    "Python 3.12": "ghcr.io/parkervcp/yolks:python_3.12",
+    "Python 3.11": "ghcr.io/parkervcp/yolks:python_3.11",
+    "Python 3.10": "ghcr.io/parkervcp/yolks:python_3.10"
+  },
+  "file_denylist": [],
+  "startup": "export PATH=/home/container/.local/bin:$PATH; if [[ -d .git ]] && [[ \"{{AUTO_UPDATE}}\" == \"1\" ]]; then git pull; fi; if [[ -n \"{{REQUIREMENTS_FILE}}\" ]] && [[ -f \"{{REQUIREMENTS_FILE}}\" ]]; then pip install --user -U -r \"{{REQUIREMENTS_FILE}}\"; fi; if [[ -n \"{{APP_FILE}}\" ]]; then /usr/local/bin/python /home/container/\"{{APP_FILE}}\"; else echo \"No python file to run, please check APP_FILE variable\"; fi",
+  "config": {
+    "files": "{}",
+    "startup": "{\n    \"done\": [\n        \"Started\",\n        \"Listening\"\n    ]\n}",
+    "logs": "{}",
+    "stop": "^C"
+  },
+  "scripts": {
+    "installation": {
+      "script": "#!/bin/bash\r\n# Python App Installation Script\r\n#\r\n# Server Files: /mnt/server\r\n\r\n# Install only essential packages\r\napt update\r\napt install -y git curl\r\n\r\nmkdir -p /mnt/server\r\ncd /mnt/server\r\n\r\nif [ -n \"${GIT_ADDRESS}\" ]; then\r\n    ## add git ending if it's not on the address\r\n    if [[ \"${GIT_ADDRESS}\" != *.git ]]; then\r\n        GIT_ADDRESS=\"${GIT_ADDRESS}.git\"\r\n    fi\r\n\r\n    if [ -z \"${GIT_USERNAME}\" ] && [ -z \"${GIT_ACCESS_TOKEN}\" ]; then\r\n        echo -e \"using anon api call\"\r\n    else\r\n        GIT_ADDRESS=\"https://${GIT_USERNAME}:${GIT_ACCESS_TOKEN}@$(echo -e ${GIT_ADDRESS} | cut -d/ -f3-)\"\r\n    fi\r\n\r\n    ## pull git python repo\r\n    if [ \"$(ls -A /mnt/server)\" ]; then\r\n        echo -e \"/mnt/server directory is not empty.\"\r\n        if [ -d .git ]; then\r\n            echo -e \".git directory exists\"\r\n            if [ -f .git/config ]; then\r\n                echo -e \"loading info from git config\"\r\n                ORIGIN=$(git config --get remote.origin.url)\r\n            else\r\n                echo -e \"files found with no git config\"\r\n                echo -e \"closing out without touching things to not break anything\"\r\n                exit 10\r\n            fi\r\n        fi\r\n\r\n        if [ \"${ORIGIN}\" == \"${GIT_ADDRESS}\" ]; then\r\n            echo \"pulling latest from github\"\r\n            git pull\r\n        fi\r\n    else\r\n        echo -e \"/mnt/server is empty.\\ncloning files into repo\"\r\n        if [ -z ${GIT_BRANCH} ]; then\r\n            echo -e \"cloning default branch\"\r\n            git clone ${GIT_ADDRESS} .\r\n        else\r\n            echo -e \"cloning ${GIT_BRANCH}'\"\r\n            git clone --single-branch --branch ${GIT_BRANCH} ${GIT_ADDRESS} .\r\n        fi\r\n    fi\r\nfi\r\n\r\nexport HOME=/mnt/server\r\n\r\necho \"Installing python requirements into folder\"\r\nif [ -f /mnt/server/${REQUIREMENTS_FILE} ]; then\r\n    pip install --upgrade pip\r\n    pip install --user -U -r ${REQUIREMENTS_FILE}\r\nfi\r\n\r\necho -e \"install complete\"\r\nexit 0",
+      "container": "ghcr.io/parkervcp/installers:debian",
+      "entrypoint": "bash"
+    }
+  },
+  "variables": [
+    {
+      "name": "Main Python File",
+      "description": "The main file to run for your application.",
+      "env_variable": "APP_FILE",
+      "default_value": "main.py",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": ["required", "string", "max:32"],
+      "sort": 1
+    },
+    {
+      "name": "Requirements File",
+      "description": "The name of the requirements file to install packages from.",
+      "env_variable": "REQUIREMENTS_FILE",
+      "default_value": "requirements.txt",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": ["required", "string", "max:32"],
+      "sort": 2
+    },
+    {
+      "name": "Git Auto Update",
+      "description": "Automatically update the application by pulling the latest files from the Git repository on every startup.",
+      "env_variable": "AUTO_UPDATE",
+      "default_value": "0",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": ["required", "boolean"],
+      "sort": 3
+    },
+    {
+      "name": "Git Repository Address",
+      "description": "The Git repository address to clone from.",
+      "env_variable": "GIT_ADDRESS",
+      "default_value": "",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": ["nullable", "string"],
+      "sort": 4
+    },
+    {
+      "name": "Git Branch",
+      "description": "The Git branch to clone from.",
+      "env_variable": "GIT_BRANCH",
+      "default_value": "",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": ["nullable", "string"],
+      "sort": 5
+    },
+    {
+      "name": "Git Username",
+      "description": "The Git username for authentication, if required.",
+      "env_variable": "GIT_USERNAME",
+      "default_value": "",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": ["nullable", "string"],
+      "sort": 6
+    },
+    {
+      "name": "Git Access Token",
+      "description": "The Git access token for authentication, if required.",
+      "env_variable": "GIT_ACCESS_TOKEN",
+      "default_value": "",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": ["nullable", "string"],
+      "sort": 7
+    }
+  ]
+}

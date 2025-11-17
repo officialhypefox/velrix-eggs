@@ -1,0 +1,97 @@
+{
+  "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PANEL",
+  "meta": {
+    "version": "PLCN_v2",
+    "update_url": "https://raw.githubusercontent.com/officialhypefox/velrix-eggs/refs/heads/main/eggs/go.json"
+  },
+  "exported_at": "2025-11-17T05:52:18+00:00",
+  "name": "Go",
+  "author": "contact@velrix.net",
+  "uuid": "b1c18867-5be4-4124-9ce2-8924339de747",
+  "description": "A statically typed, compiled programming language designed at Google.",
+  "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxZW0iIGhlaWdodD0iMWVtIiB2aWV3Qm94PSIwIDAgMjU2IDI1NiI+PGcgZmlsbD0ibm9uZSI+PHJlY3Qgd2lkdGg9IjI1NiIgaGVpZ2h0PSIyNTYiIGZpbGw9IiMwMEI0RTAiIHJ4PSI2MCIvPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik00MC41IDExMy4yMzRjLS40IDAtLjUtLjItLjMtLjVsMi4xLTIuN2MuMi0uMy43LS41IDEuMS0uNWgzNS43Yy40IDAgLjUuMy4zLjZsLTEuNyAyLjZjLS4yLjMtLjcuNi0xIC42em0tMTUuMSA5LjJjLS40IDAtLjUtLjItLjMtLjVsMi4xLTIuN2MuMi0uMy43LS41IDEuMS0uNWg0NS42Yy40IDAgLjYuMy41LjZsLS44IDIuNGMtLjEuNC0uNS42LS45LjZ6bTI0LjIgOS4yYy0uNCAwLS41LS4zLS4zLS42bDEuNC0yLjVjLjItLjMuNi0uNiAxLS42aDIwYy40IDAgLjYuMy42LjdsLS4yIDIuNGMwIC40LS40LjctLjcuN3ptMTAzLjgtMjAuMmMtNi4zIDEuNi0xMC42IDIuOC0xNi44IDQuNGMtMS41LjQtMS42LjUtMi45LTFjLTEuNS0xLjctMi42LTIuOC00LjctMy44Yy02LjMtMy4xLTEyLjQtMi4yLTE4LjEgMS41Yy02LjggNC40LTEwLjMgMTAuOS0xMC4yIDE5Yy4xIDggNS42IDE0LjYgMTMuNSAxNS43YzYuOC45IDEyLjUtMS41IDE3LTYuNmMuOS0xLjEgMS43LTIuMyAyLjctMy43aC0xOS4zYy0yLjEgMC0yLjYtMS4zLTEuOS0zYzEuMy0zLjEgMy43LTguMyA1LjEtMTAuOWMuMy0uNiAxLTEuNiAyLjUtMS42aDM2LjRjLS4yIDIuNy0uMiA1LjQtLjYgOC4xYy0xLjEgNy4yLTMuOCAxMy44LTguMiAxOS42Yy03LjIgOS41LTE2LjYgMTUuNC0yOC41IDE3Yy05LjggMS4zLTE4LjktLjYtMjYuOS02LjZjLTcuNC01LjYtMTEuNi0xMy0xMi43LTIyLjJjLTEuMy0xMC45IDEuOS0yMC43IDguNS0yOS4zYzcuMS05LjMgMTYuNS0xNS4yIDI4LTE3LjNjOS40LTEuNyAxOC40LS42IDI2LjUgNC45YzUuMyAzLjUgOS4xIDguMyAxMS42IDE0LjFjLjYuOS4yIDEuNC0xIDEuNyIvPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0xODYuNSAxNjYuNzM0Yy05LjEtLjItMTcuNC0yLjgtMjQuNC04LjhjLTUuOS01LjEtOS42LTExLjYtMTAuOC0xOS4zYy0xLjgtMTEuMyAxLjMtMjEuMyA4LjEtMzAuMmM3LjMtOS42IDE2LjEtMTQuNiAyOC0xNi43YzEwLjItMS44IDE5LjgtLjggMjguNSA1LjFjNy45IDUuNCAxMi44IDEyLjcgMTQuMSAyMi4zYzEuNyAxMy41LTIuMiAyNC41LTExLjUgMzMuOWMtNi42IDYuNy0xNC43IDEwLjktMjQgMTIuOGMtMi43LjUtNS40LjYtOCAuOW0yMy44LTQwLjRjLS4xLTEuMy0uMS0yLjMtLjMtMy4zYy0xLjgtOS45LTEwLjktMTUuNS0yMC40LTEzLjNjLTkuMyAyLjEtMTUuMyA4LTE3LjUgMTcuNGMtMS44IDcuOCAyIDE1LjcgOS4yIDE4LjljNS41IDIuNCAxMSAyLjEgMTYuMy0uNmM3LjktNC4xIDEyLjItMTAuNSAxMi43LTE5LjEiLz48L2c+PC9zdmc+",
+  "tags": [],
+  "features": [],
+  "docker_images": {
+    "Go 1.23": "ghcr.io/parkervcp/yolks:go_1.23",
+    "Go 1.22": "ghcr.io/parkervcp/yolks:go_1.22",
+    "Go 1.21": "ghcr.io/parkervcp/yolks:go_1.21"
+  },
+  "file_denylist": [],
+  "startup": "if [[ -d .git ]] && [[ \"{{AUTO_UPDATE}}\" == \"1\" ]]; then git pull; fi; if [[ -n \"{{EXECUTABLE_NAME}}\" ]]; then if [[ -f \"{{EXECUTABLE_NAME}}\" ]]; then chmod +x \"{{EXECUTABLE_NAME}}\" && ./\"{{EXECUTABLE_NAME}}\"; else echo \"Executable '{{EXECUTABLE_NAME}}' not found. Please ensure it has been compiled.\"; fi; else echo \"EXECUTABLE_NAME is not set. Please set it to your compiled executable file.\"; fi",
+  "config": {
+    "files": "{}",
+    "startup": "{\n    \"done\": [\n        \"Started\",\n        \"Listening\"\n    ]\n}",
+    "logs": "{}",
+    "stop": "^C"
+  },
+  "scripts": {
+    "installation": {
+      "script": "#!/bin/bash\r\n# Go Application Installation Script\r\n#\r\n# Server Files: /mnt/server\r\n\r\n# Install only essential packages\r\napt update\r\napt install -y git curl\r\n\r\nmkdir -p /mnt/server\r\ncd /mnt/server\r\n\r\nif [ -n \"${GIT_ADDRESS}\" ]; then\r\n    ## add git ending if it's not on the address\r\n    if [[ \"${GIT_ADDRESS}\" != *.git ]]; then\r\n        GIT_ADDRESS=\"${GIT_ADDRESS}.git\"\r\n    fi\r\n\r\n    if [ -z \"${GIT_USERNAME}\" ] && [ -z \"${GIT_ACCESS_TOKEN}\" ]; then\r\n        echo -e \"using anon api call\"\r\n    else\r\n        GIT_ADDRESS=\"https://${GIT_USERNAME}:${GIT_ACCESS_TOKEN}@$(echo -e ${GIT_ADDRESS} | cut -d/ -f3-)\"\r\n    fi\r\n\r\n    ## pull git go repo\r\n    if [ \"$(ls -A /mnt/server)\" ]; then\r\n        echo -e \"/mnt/server directory is not empty.\"\r\n        if [ -d .git ]; then\r\n            echo -e \".git directory exists\"\r\n            if [ -f .git/config ]; then\r\n                echo -e \"loading info from git config\"\r\n                ORIGIN=$(git config --get remote.origin.url)\r\n            else\r\n                echo -e \"files found with no git config\"\r\n                echo -e \"closing out without touching things to not break anything\"\r\n                exit 10\r\n            fi\r\n        fi\r\n\r\n        if [ \"${ORIGIN}\" == \"${GIT_ADDRESS}\" ]; then\r\n            echo \"pulling latest from github\"\r\n            git pull\r\n        fi\r\n    else\r\n        echo -e \"/mnt/server is empty.\\ncloning files into repo\"\r\n        if [ -z ${GIT_BRANCH} ]; then\r\n            echo -e \"cloning default branch\"\r\n            git clone ${GIT_ADDRESS} .\r\n        else\r\n            echo -e \"cloning ${GIT_BRANCH}'\"\r\n            git clone --single-branch --branch ${GIT_BRANCH} ${GIT_ADDRESS} .\r\n        fi\r\n    fi\r\nfi\r\n\r\necho -e \"install complete\"\r\nexit 0",
+      "container": "ghcr.io/parkervcp/installers:debian",
+      "entrypoint": "bash"
+    }
+  },
+  "variables": [
+    {
+      "name": "Executable Name",
+      "description": "The name of the compiled executable file.",
+      "env_variable": "EXECUTABLE_NAME",
+      "default_value": "main",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": ["required", "string", "max:32"],
+      "sort": 2
+    },
+    {
+      "name": "Git Auto Update",
+      "description": "Automatically update the application by pulling the latest files from the Git repository on every startup.",
+      "env_variable": "AUTO_UPDATE",
+      "default_value": "0",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": ["required", "boolean"],
+      "sort": 4
+    },
+    {
+      "name": "Git Repository Address",
+      "description": "The Git repository address to clone from.",
+      "env_variable": "GIT_ADDRESS",
+      "default_value": "",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": ["nullable", "string"],
+      "sort": 5
+    },
+    {
+      "name": "Git Branch",
+      "description": "The Git branch to clone from.",
+      "env_variable": "GIT_BRANCH",
+      "default_value": "",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": ["nullable", "string"],
+      "sort": 6
+    },
+    {
+      "name": "Git Username",
+      "description": "The Git username for authentication, if required.",
+      "env_variable": "GIT_USERNAME",
+      "default_value": "",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": ["nullable", "string"],
+      "sort": 7
+    },
+    {
+      "name": "Git Access Token",
+      "description": "The Git access token for authentication, if required.",
+      "env_variable": "GIT_ACCESS_TOKEN",
+      "default_value": "",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": ["nullable", "string"],
+      "sort": 8
+    }
+  ]
+}

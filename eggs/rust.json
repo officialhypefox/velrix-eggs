@@ -1,0 +1,95 @@
+{
+  "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PANEL",
+  "meta": {
+    "version": "PLCN_v2",
+    "update_url": "https://raw.githubusercontent.com/officialhypefox/velrix-eggs/refs/heads/main/eggs/rust.json"
+  },
+  "exported_at": "2025-11-17T05:52:18+00:00",
+  "name": "Rust",
+  "author": "contact@velrix.net",
+  "uuid": "46a0d309-4e45-4475-ab2a-7e4a965fe410",
+  "description": "A systems programming language focused on safety, speed, and concurrency.",
+  "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxZW0iIGhlaWdodD0iMWVtIiB2aWV3Qm94PSIwIDAgMjU2IDI1NiI+PGcgZmlsbD0ibm9uZSI+PHJlY3Qgd2lkdGg9IjI1NiIgaGVpZ2h0PSIyNTYiIGZpbGw9IiNFNDM3MTciIHJ4PSI2MCIvPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Im0yMjYuNTc0IDEyNS41NTFsLTguMzktNS4xOThxLS4xMDctMS4yMjctLjIzOS0yLjQ0Nmw3LjIyNC02LjcyN2EyLjg4IDIuODggMCAwIDAgLjg2NC0yLjY3NmEyLjg3IDIuODcgMCAwIDAtMS44MjEtMi4xNGwtOS4yMzItMy40NGMtLjIzMS0uNzk5LS40NzQtMS41OTItLjcyMi0yLjM4OWw1Ljc1My03Ljk4OGEyLjg4IDIuODggMCAwIDAgLjMyNS0yLjc5YTIuOSAyLjkgMCAwIDAtMi4xOTgtMS43NDdsLTkuNzI5LTEuNTgzYTcyIDcyIDAgMCAwLTEuMTctMi4xNzhsNC4wOTEtOC45ODJhMi44OSAyLjg5IDAgMCAwLS4yMjYtMi44MWEyLjg3IDIuODcgMCAwIDAtMi41MDQtMS4yODJsLTkuODgxLjM0NHEtLjc2NS0uOTU4LTEuNTYtMS44OTJsMi4yNzUtOS42MTNhMi44OTYgMi44OTYgMCAwIDAtMy40ODUtMy40ODNsLTkuNjEzIDIuMjc0YTgzIDgzIDAgMCAwLTEuODk2LTEuNTZsLjM0Ni05Ljg4Yy4wMzgtMS0uNDUtMS45NS0xLjI4My0yLjUwNGEyLjkgMi45IDAgMCAwLTIuODEtLjIyN2wtOC45NjQgNC4wOXEtMS4wODYtLjU5OS0yLjE3OC0xLjE3MmwtMS41ODctOS43MjdhMi44NyAyLjg3IDAgMCAwLTEuNzQ3LTIuMTk4YTIuODggMi44OCAwIDAgMC0yLjc5LjMyNWwtNy45ODkgNS43NTJhOTcgOTcgMCAwIDAtMi4zNy0uNzJsLTMuNDQxLTkuMjNhMi44OSAyLjg5IDAgMCAwLTIuMTQtMS44MjZhMi45IDIuOSAwIDAgMC0yLjY3Ni44NjRsLTYuNzI4IDcuMjI0YTg3IDg3IDAgMCAwLTIuNDQ2LS4yMzlsLTUuMTk5LTguNDA5QTIuOSAyLjkgMCAwIDAgMTI3Ljk3MiAyOGMtMS4wMDkgMC0xLjkzLjUxOC0yLjQ0NiAxLjM2OGwtNS4xOTkgOC40MWMtLjgxOC4wNjYtMS42MzYuMTQ4LTIuNDQ2LjIzOGwtNi43MjgtNy4yMjRhMi45IDIuOSAwIDAgMC0yLjY3Ni0uODY0YTIuODggMi44OCAwIDAgMC0yLjE0MSAxLjgyNWwtMy40NCA5LjIzYy0uNzk5LjIzLTEuNTkuNDczLTIuMzcuNzIxbC03Ljk5LTUuNzUyYTIuODcgMi44NyAwIDAgMC0yLjc5LS4zMjVBMi45IDIuOSAwIDAgMCA4OCAzNy44MjVsLTEuNTg2IDkuNzI3cS0xLjEuNTcxLTIuMTc5IDEuMTcybC04Ljk2NC00LjA5YTIuODkzIDIuODkzIDAgMCAwLTQuMDkyIDIuNzMxbC4zNDQgOS44OGE5MiA5MiAwIDAgMC0xLjg5NiAxLjU2bC05LjYxNC0yLjI3NGEyLjkxIDIuOTEgMCAwIDAtMi43MTQuNzdjLS43MS43MDktMSAxLjczMS0uNzcgMi43MTNsMi4yNTUgOS42MTNhOTMgOTMgMCAwIDAtMS41NTYgMS44OTJsLTkuODgtLjM0NGEyLjkgMi45IDAgMCAwLTIuNTA1IDEuMjgyYTIuOSAyLjkgMCAwIDAtLjIyNyAyLjgxbDQuMDkgOC45ODJxLS41OTkgMS4wOC0xLjE3MiAyLjE3OGwtOS43MjggMS41ODNhMi44NyAyLjg3IDAgMCAwLTIuMTk4IDEuNzQ3YTIuODkgMi44OSAwIDAgMCAuMzI1IDIuNzlsNS43NTMgNy45ODhhODIgODIgMCAwIDAtLjcyMyAyLjM4OWwtOS4yMzEgMy40NGEyLjg5IDIuODkgMCAwIDAtMS44MjIgMi4xNGEyLjg5IDIuODkgMCAwIDAgLjg2NCAyLjY3Nmw3LjIyNSA2LjcyN3EtLjEzNSAxLjIyLS4yMzkgMi40NDZsLTguMzkgNS4xOThhMi44OSAyLjg5IDAgMCAwLTEuMzcgMi40NjVjMCAxLjAxMS41MTggMS45MzEgMS4zNjkgMi40NDdsOC4zOSA1LjE5OHEuMTA1IDEuMjI4LjIzOSAyLjQ0NmwtNy4yMjUgNi43MjdhMi44ODggMi44ODggMCAwIDAgLjk1OCA0LjgxNmw5LjIzMSAzLjQ0Yy4yMy43OTkuNDcyIDEuNTkyLjcyMyAyLjM4OWwtNS43NTMgNy45ODhhMi44ODYgMi44ODYgMCAwIDAgMS44OTIgNC41MzdsOS43MjkgMS41ODJxLjU3IDEuMTA3IDEuMTcxIDIuMTc5bC00LjA5IDguOTYzYTIuODkyIDIuODkyIDAgMCAwIDIuNzMxIDQuMDkxbDkuODYyLS4zNDVhOTUgOTUgMCAwIDAgMS41NiAxLjg5NWwtMi4yNTUgOS42MTNjLS4yMy45NzUuMDYgMS45ODguNzcgMi42OTVhMi44OSAyLjg5IDAgMCAwIDIuNzE0Ljc2OGw5LjYxNC0yLjI1NWE3OCA3OCAwIDAgMCAxLjg5NiAxLjU1NmwtLjM0NCA5Ljg4YTIuODggMi44OCAwIDAgMCAxLjI4MiAyLjUwM2MuODMuNTU2IDEuODkzLjY0MSAyLjgxLjIyNGw4Ljk2NC00LjA5cTEuMDgzLjYwMiAyLjE3OSAxLjE3MmwxLjU4NiA5LjcyN2MuMTYuOTkuODIyIDEuODI3IDEuNzQ3IDIuMjE3Yy45MjMuMzg0IDEuOTg4LjI2IDIuNzktLjMyM2w3Ljk5LTUuNzUyYy43ODkuMjUgMS41ODIuNDk1IDIuMzg5LjcyNGwzLjQ0IDkuMjNhMi44OCAyLjg4IDAgMCAwIDIuMTQxIDEuODIyYTIuODggMi44OCAwIDAgMCAyLjY3Ni0uODY0bDYuNzI4LTcuMjI0Yy44MTIuMDk0IDEuNjMuMTcyIDIuNDQ2LjI0NWw1LjE5OSA4LjM4OWEyLjg5IDIuODkgMCAwIDAgMi40NDYgMS4zNjljLjk5MiAwIDEuOTMxLS41MiAyLjQ2Ni0xLjM2OWw1LjE5OS04LjM4OWE5NCA5NCAwIDAgMCAyLjQ0Ni0uMjQ1bDYuNzI4IDcuMjI0YTIuODggMi44OCAwIDAgMCAyLjY3Ni44NjRhMi44NyAyLjg3IDAgMCAwIDIuMTQtMS44MjJsMy40NDEtOS4yM2MuNzk4LS4yMjkgMS41OTItLjQ3NCAyLjM4OS0uNzI0bDcuOTg5IDUuNzUyYTIuODg1IDIuODg1IDAgMCAwIDQuNTM3LTEuODk0bDEuNTg3LTkuNzI3Yy43MzQtLjM4MSAxLjQ2LS43NzYgMi4xNzktMS4xNzJsOC45NjQgNC4wOWEyLjg5IDIuODkgMCAwIDAgNC4wOTItMi43MjdsLS4zNDQtOS44OGE4MCA4MCAwIDAgMCAxLjg5NC0xLjU1Nmw5LjYxMyAyLjI1NWEyLjg5IDIuODkgMCAwIDAgMi43MTUtLjc2OGEyLjg3IDIuODcgMCAwIDAgLjc3LTIuNjk1bC0yLjI1Ni05LjYxM2E3NiA3NiAwIDAgMCAxLjU1Ni0xLjg5NWw5Ljg4Mi4zNDVhMi44NyAyLjg3IDAgMCAwIDIuNTAzLTEuMjgyYTIuODggMi44OCAwIDAgMCAuMjI2LTIuODA5bC00LjA5LTguOTYzcS42LTEuMDg2IDEuMTctMi4xNzlsOS43MjgtMS41ODJhMi44NiAyLjg2IDAgMCAwIDIuMTk4LTEuNzQ3YTIuODggMi44OCAwIDAgMC0uMzI1LTIuNzlsLTUuNzUzLTcuOTg4Yy4yNDktLjc5LjQ5MS0xLjU4My43MjMtMi4zODlsOS4yMzEtMy40NGEyLjg4IDIuODggMCAwIDAgMS44MjItMi4xNDFhMi44OCAyLjg4IDAgMCAwLS44NjQtMi42NzVsLTcuMjI1LTYuNzI3cS4xMzItMS4yMi4yMzktMi40NDZsOC4zOTEtNS4xOThhMi44OCAyLjg4IDAgMCAwIDEuMzY4LTIuNDQ3YzAtLjk5MS0uNTE2LTEuOTMtMS4zNjctMi40NjV6bS01Ni4xOTIgNjkuNzU1Yy0zLjIxMS0uNjkyLTUuMjM3LTMuODYxLTQuNTQ5LTcuMDcxYTUuOTQgNS45NCAwIDAgMSA3LjA1My00LjU2OGMzLjIxMS42ODYgNS4yNTYgMy44NiA0LjU2OCA3LjA3MWE1Ljk0IDUuOTQgMCAwIDEtNy4wNTMgNC41Njh6bS0yLjg0OC0xOS4zMDJjLTIuOTI0LS42MjctNS44MSAxLjIzNC02LjQyMiA0LjE2NmwtMi45ODEgMTMuOTEyYy05LjE5NCA0LjE2Ny0xOS40OTYgNi40OTgtMzAuMTk5IDYuNDk4Yy0xMS4wMDkgMC0yMS40MDYtMi40MjctMzAuNzcyLTYuNzg0bC0yLjk4MS0xMy45MTNjLS42MjctMi45MjQtMy40OTgtNC43OTctNi40MjItNC4xNjZsLTEyLjI5IDIuNjM3YTc0IDc0IDAgMCAxLTYuMzQ2LTcuNDkxaDU5LjgyNGMuNjc3IDAgMS4xMjgtLjEyMiAxLjEyOC0uNzM4di0yMS4yMTNjMC0uNjE1LS40NTEtLjczNy0xLjEyOC0uNzM3aC0xNy40ODh2LTEzLjM5N2gxOC45MDJjMS43MjYgMCA5LjIzMi40OTMgMTEuNjIxIDEwLjA5Yy43NTEgMi45NDMgMi40MDggMTIuNTM3IDMuNTM2IDE1LjYxNGMxLjEyNCAzLjQ0IDUuNjk2IDEwLjMyIDEwLjU3IDEwLjMyaDI5LjgxNmMuMzM4IDAgLjY5OS0uMDM5IDEuMDgtLjEwN2E3NSA3NSAwIDAgMS02Ljc2NiA3Ljk1bC0xMi41NzctMi42OTV6bS04Mi43NTkgMTkuMDE1YTUuOTMzIDUuOTMzIDAgMCAxLTcuMDUzLTQuNTY4Yy0uNjg2LTMuMjEgMS4zNTQtNi4zODMgNC41NjgtNy4wNzFhNS45NCA1Ljk0IDAgMCAxIDcuMDUzIDQuNTY4Yy42ODYgMy4yMTEtMS4zNTUgNi4zODMtNC41NjggNy4wNzFtLTIyLjc0NC05MS45MjNhNS45NiA1Ljk2IDAgMCAxLTMuMDIgNy44NTRhNS45NCA1Ljk0IDAgMCAxLTcuODM3LTMuMDE5Yy0xLjMzNy0yLjk5Ny4wMjMtNi41MTcgMy4wMi03Ljg1NWE1Ljk0IDUuOTQgMCAwIDEgNy44MzcgMy4wMm0tNi45NzcgMTYuNTEybDEyLjgwNi01LjY5NWMyLjczMy0xLjIxNCAzLjk3Ni00LjQxNSAyLjc1Mi03LjE0OGwtMi42MzctNS45NjJoMTAuMzU5djQ2LjYzSDU3LjUwMWE3My4zIDczLjMgMCAwIDEtMi43OS0yMC4wNjZhNzQgNzQgMCAwIDEgLjQxOC03Ljg1NXptNTYuMTkzLTQuNTN2LTEzLjc1OWgyNC42NTVjMS4yNzUgMCA5LjAwMiAxLjQ3MyA5LjAwMiA3LjI0M2MwIDQuNzk2LTUuOTI1IDYuNTE2LTEwLjc5OCA2LjUxNkgxMTEuMTd6bTg5LjYzOSAxMi4zODRjMCAxLjgyNy0uMDY3IDMuNjMxLS4yIDUuNDI4aC03LjUxMmMtLjc1MSAwLTEuMDUzLjQ5My0xLjA1MyAxLjIyOHYzLjQ0YzAgOC4xMDMtNC41NjggOS44ODEtOC41ODIgMTAuMzJjLTMuODIyLjQzLTguMDQ2LTEuNTk3LTguNTYyLTMuOTM3Yy0yLjI1Ni0xMi42Ny02LjAwMi0xNS4zNjUtMTEuOTI3LTIwLjA2NmM3LjM1OS00LjY2MyAxNS4wMDQtMTEuNTYyIDE1LjAwNC0yMC44MzFjMC05Ljk1Ni02LjgyMy0xNi4yMjUtMTEuNDY4LTE5LjMwMmMtNi41MzYtNC4zLTEzLjc2MS01LjE2LTE1LjcxMS01LjE2SDczLjI3N2MxMC41My0xMS43MzMgMjQuODQ3LTIwLjA2NiA0MC45MDEtMjMuMTI0bDkuMTU2IDkuNTk0YTUuNDE1IDUuNDE1IDAgMCAwIDcuNjY0LjE3NmwxMC4yNDQtOS43ODVjMjEuNDA3IDMuOTk0IDM5LjU2NCAxNy4zMzQgNTAuMDc2IDM1LjczN2wtNy4wMTQgMTUuODI0Yy0xLjIxIDIuNzMzLjAyNSA1Ljk0NCAyLjc1MiA3LjE0OGwxMy40OTQgNmMuMjMzIDIuMzg5LjM1NSA0LjgxNi4zNTUgNy4yNjJ6bS03Ny41OTgtODAuMDc0YTUuOTIzIDUuOTIzIDAgMCAxIDguMzkuMTkzYTUuOTYgNS45NiAwIDAgMS0uMTk3IDguNDA5YTUuOTIgNS45MiAwIDAgMS04LjM5LS4xOTVhNS45NiA1Ljk2IDAgMCAxIC4xOTctOC40MDl6bTY5LjU3MSA1NS45OTVhNS45MjcgNS45MjcgMCAwIDEgNy44MzYtMy4wMmE1Ljk1IDUuOTUgMCAwIDEgMy4wMiA3Ljg1NWE1LjkzIDUuOTMgMCAwIDEtNy44MzYgMy4wMTlhNS45NSA1Ljk1IDAgMCAxLTMuMDItNy44NTQiLz48L2c+PC9zdmc+",
+  "tags": [],
+  "features": [],
+  "docker_images": {
+    "Rust Latest": "ghcr.io/parkervcp/yolks:rust_latest"
+  },
+  "file_denylist": [],
+  "startup": "if [[ -d .git ]] && [[ \"{{AUTO_UPDATE}}\" == \"1\" ]]; then git pull; fi; if [[ -n \"{{EXECUTABLE_NAME}}\" ]]; then if [[ -f \"{{EXECUTABLE_NAME}}\" ]]; then chmod +x \"{{EXECUTABLE_NAME}}\" && ./\"{{EXECUTABLE_NAME}}\"; else echo \"Executable '{{EXECUTABLE_NAME}}' not found. Please ensure it has been compiled.\"; fi; else echo \"EXECUTABLE_NAME is not set. Please set it to your compiled executable file.\"; fi",
+  "config": {
+    "files": "{}",
+    "startup": "{\n    \"done\": [\n        \"Started\",\n        \"Listening\"\n    ]\n}",
+    "logs": "{}",
+    "stop": "^C"
+  },
+  "scripts": {
+    "installation": {
+      "script": "#!/bin/bash\r\n# Rust Application Installation Script\r\n#\r\n# Server Files: /mnt/server\r\n\r\n# Install only essential packages for Rust compilation\r\napt update\r\napt install -y git curl gcc pkg-config libssl-dev\r\n\r\nmkdir -p /mnt/server\r\ncd /mnt/server\r\n\r\nif [ -n \"${GIT_ADDRESS}\" ]; then\r\n    ## add git ending if it's not on the address\r\n    if [[ \"${GIT_ADDRESS}\" != *.git ]]; then\r\n        GIT_ADDRESS=\"${GIT_ADDRESS}.git\"\r\n    fi\r\n\r\n    if [ -z \"${GIT_USERNAME}\" ] && [ -z \"${GIT_ACCESS_TOKEN}\" ]; then\r\n        echo -e \"using anon api call\"\r\n    else\r\n        GIT_ADDRESS=\"https://${GIT_USERNAME}:${GIT_ACCESS_TOKEN}@$(echo -e ${GIT_ADDRESS} | cut -d/ -f3-)\"\r\n    fi\r\n\r\n    ## pull git rust repo\r\n    if [ \"$(ls -A /mnt/server)\" ]; then\r\n        echo -e \"/mnt/server directory is not empty.\"\r\n        if [ -d .git ]; then\r\n            echo -e \".git directory exists\"\r\n            if [ -f .git/config ]; then\r\n                echo -e \"loading info from git config\"\r\n                ORIGIN=$(git config --get remote.origin.url)\r\n            else\r\n                echo -e \"files found with no git config\"\r\n                echo -e \"closing out without touching things to not break anything\"\r\n                exit 10\r\n            fi\r\n        fi\r\n\r\n        if [ \"${ORIGIN}\" == \"${GIT_ADDRESS}\" ]; then\r\n            echo \"pulling latest from github\"\r\n            git pull\r\n        fi\r\n    else\r\n        echo -e \"/mnt/server is empty.\\ncloning files into repo\"\r\n        if [ -z ${GIT_BRANCH} ]; then\r\n            echo -e \"cloning default branch\"\r\n            git clone ${GIT_ADDRESS} .\r\n        else\r\n            echo -e \"cloning ${GIT_BRANCH}'\"\r\n            git clone --single-branch --branch ${GIT_BRANCH} ${GIT_ADDRESS} .\r\n        fi\r\n    fi\r\nfi\r\n\r\necho -e \"install complete\"\r\nexit 0",
+      "container": "ghcr.io/parkervcp/installers:debian",
+      "entrypoint": "bash"
+    }
+  },
+  "variables": [
+    {
+      "name": "Executable Name",
+      "description": "The name of the compiled executable file.",
+      "env_variable": "EXECUTABLE_NAME",
+      "default_value": "main",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": ["required", "string", "max:32"],
+      "sort": 1
+    },
+    {
+      "name": "Git Auto Update",
+      "description": "Automatically update the application by pulling the latest files from the Git repository on every startup.",
+      "env_variable": "AUTO_UPDATE",
+      "default_value": "0",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": ["required", "boolean"],
+      "sort": 3
+    },
+    {
+      "name": "Git Repository Address",
+      "description": "The Git repository address to clone from.",
+      "env_variable": "GIT_ADDRESS",
+      "default_value": "",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": ["nullable", "string"],
+      "sort": 4
+    },
+    {
+      "name": "Git Branch",
+      "description": "The Git branch to clone from.",
+      "env_variable": "GIT_BRANCH",
+      "default_value": "",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": ["nullable", "string"],
+      "sort": 5
+    },
+    {
+      "name": "Git Username",
+      "description": "The Git username for authentication, if required.",
+      "env_variable": "GIT_USERNAME",
+      "default_value": "",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": ["nullable", "string"],
+      "sort": 6
+    },
+    {
+      "name": "Git Access Token",
+      "description": "The Git access token for authentication, if required.",
+      "env_variable": "GIT_ACCESS_TOKEN",
+      "default_value": "",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": ["nullable", "string"],
+      "sort": 7
+    }
+  ]
+}
