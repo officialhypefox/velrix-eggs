@@ -13,11 +13,11 @@
   "tags": [],
   "features": [],
   "docker_images": {
-    "Python 3.14": "ghcr.io/parkervcp/yolks:python_3.14",
-    "Python 3.13": "ghcr.io/parkervcp/yolks:python_3.13",
-    "Python 3.12": "ghcr.io/parkervcp/yolks:python_3.12",
-    "Python 3.11": "ghcr.io/parkervcp/yolks:python_3.11",
-    "Python 3.10": "ghcr.io/parkervcp/yolks:python_3.10"
+    "Python 3.14": "ghcr.io/pelican-eggs/yolks:python_3.14",
+    "Python 3.13": "ghcr.io/pelican-eggs/yolks:python_3.13",
+    "Python 3.12": "ghcr.io/pelican-eggs/yolks:python_3.12",
+    "Python 3.11": "ghcr.io/pelican-eggs/yolks:python_3.11",
+    "Python 3.10": "ghcr.io/pelican-eggs/yolks:python_3.10"
   },
   "file_denylist": [],
   "startup": "export PATH=/home/container/.local/bin:$PATH; if [[ -d .git ]] && [[ \"{{AUTO_UPDATE}}\" == \"1\" ]]; then git pull; fi; if [[ -n \"{{REQUIREMENTS_FILE}}\" ]] && [[ -f \"{{REQUIREMENTS_FILE}}\" ]]; then pip install --user -U -r \"{{REQUIREMENTS_FILE}}\"; fi; if [[ -n \"{{APP_FILE}}\" ]]; then /usr/local/bin/python /home/container/\"{{APP_FILE}}\"; else echo \"No python file to run, please check APP_FILE variable\"; fi",
@@ -30,7 +30,7 @@
   "scripts": {
     "installation": {
       "script": "#!/bin/bash\r\n# Python App Installation Script\r\n#\r\n# Server Files: /mnt/server\r\n\r\n# Install only essential packages\r\napt update\r\napt install -y git curl\r\n\r\nmkdir -p /mnt/server\r\ncd /mnt/server\r\n\r\nif [ -n \"${GIT_ADDRESS}\" ]; then\r\n    ## add git ending if it's not on the address\r\n    if [[ \"${GIT_ADDRESS}\" != *.git ]]; then\r\n        GIT_ADDRESS=\"${GIT_ADDRESS}.git\"\r\n    fi\r\n\r\n    if [ -z \"${GIT_USERNAME}\" ] && [ -z \"${GIT_ACCESS_TOKEN}\" ]; then\r\n        echo -e \"using anon api call\"\r\n    else\r\n        GIT_ADDRESS=\"https://${GIT_USERNAME}:${GIT_ACCESS_TOKEN}@$(echo -e ${GIT_ADDRESS} | cut -d/ -f3-)\"\r\n    fi\r\n\r\n    ## pull git python repo\r\n    if [ \"$(ls -A /mnt/server)\" ]; then\r\n        echo -e \"/mnt/server directory is not empty.\"\r\n        if [ -d .git ]; then\r\n            echo -e \".git directory exists\"\r\n            if [ -f .git/config ]; then\r\n                echo -e \"loading info from git config\"\r\n                ORIGIN=$(git config --get remote.origin.url)\r\n            else\r\n                echo -e \"files found with no git config\"\r\n                echo -e \"closing out without touching things to not break anything\"\r\n                exit 10\r\n            fi\r\n        fi\r\n\r\n        if [ \"${ORIGIN}\" == \"${GIT_ADDRESS}\" ]; then\r\n            echo \"pulling latest from github\"\r\n            git pull\r\n        fi\r\n    else\r\n        echo -e \"/mnt/server is empty.\\ncloning files into repo\"\r\n        if [ -z ${GIT_BRANCH} ]; then\r\n            echo -e \"cloning default branch\"\r\n            git clone ${GIT_ADDRESS} .\r\n        else\r\n            echo -e \"cloning ${GIT_BRANCH}'\"\r\n            git clone --single-branch --branch ${GIT_BRANCH} ${GIT_ADDRESS} .\r\n        fi\r\n    fi\r\nfi\r\n\r\nexport HOME=/mnt/server\r\n\r\necho \"Installing python requirements into folder\"\r\nif [ -f /mnt/server/${REQUIREMENTS_FILE} ]; then\r\n    pip install --upgrade pip\r\n    pip install --user -U -r ${REQUIREMENTS_FILE}\r\nfi\r\n\r\necho -e \"install complete\"\r\nexit 0",
-      "container": "ghcr.io/parkervcp/installers:debian",
+      "container": "ghcr.io/pelican-eggs/installers:debian",
       "entrypoint": "bash"
     }
   },
@@ -42,7 +42,11 @@
       "default_value": "main.py",
       "user_viewable": true,
       "user_editable": true,
-      "rules": ["required", "string", "max:32"],
+      "rules": [
+        "required",
+        "string",
+        "max:32"
+      ],
       "sort": 1
     },
     {
@@ -52,7 +56,11 @@
       "default_value": "requirements.txt",
       "user_viewable": true,
       "user_editable": true,
-      "rules": ["required", "string", "max:32"],
+      "rules": [
+        "required",
+        "string",
+        "max:32"
+      ],
       "sort": 2
     },
     {
@@ -62,7 +70,10 @@
       "default_value": "0",
       "user_viewable": true,
       "user_editable": true,
-      "rules": ["required", "boolean"],
+      "rules": [
+        "required",
+        "boolean"
+      ],
       "sort": 3
     },
     {
@@ -72,7 +83,10 @@
       "default_value": "",
       "user_viewable": true,
       "user_editable": true,
-      "rules": ["nullable", "string"],
+      "rules": [
+        "nullable",
+        "string"
+      ],
       "sort": 4
     },
     {
@@ -82,7 +96,10 @@
       "default_value": "",
       "user_viewable": true,
       "user_editable": true,
-      "rules": ["nullable", "string"],
+      "rules": [
+        "nullable",
+        "string"
+      ],
       "sort": 5
     },
     {
@@ -92,7 +109,10 @@
       "default_value": "",
       "user_viewable": true,
       "user_editable": true,
-      "rules": ["nullable", "string"],
+      "rules": [
+        "nullable",
+        "string"
+      ],
       "sort": 6
     },
     {
@@ -102,7 +122,10 @@
       "default_value": "",
       "user_viewable": true,
       "user_editable": true,
-      "rules": ["nullable", "string"],
+      "rules": [
+        "nullable",
+        "string"
+      ],
       "sort": 7
     }
   ]
