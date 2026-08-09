@@ -516,11 +516,24 @@ most common cause of "works locally, fails in the panel".
 **The panel's `done` marker decides whether the server looks alive.** Pick a real
 one.
 
-**Log noise is a support cost.** A red `ERROR` line at the end of a successful
-install generates tickets. Either remove the cause or explain it in the install
-output. Modmail's install prints a line saying the pip `wheel`/`packaging`
-conflict is expected, because suppressing it would hide a true statement and
-leaving it unexplained would generate tickets.
+**Log noise is a support cost, so remove the cause rather than the message.** A
+red `ERROR` at the end of a successful install generates tickets whether or not
+it means anything. Modmail's install used to end with a pip conflict, because the
+Python image preinstalls `wheel`, `wheel` requires `packaging>=24`, and upstream's
+lockfile pins `packaging==23.2`.
+
+The tempting fixes are `--no-warn-conflicts` or a note in the output saying to
+ignore it. Both are worse than finding out *which* package declares the
+dependency:
+
+```bash
+podman run --rm --entrypoint bash <installer-image> -c 'pip show wheel | grep Requires'
+```
+
+`wheel` turned out to be the only thing in the image wanting `packaging` at all,
+and nothing in the install needs it, since pip builds sdists in an isolated
+environment with its own copy. Uninstalling it removes the conflict for real and
+leaves the resolver free to report a genuine one.
 
 ## Checklist
 
