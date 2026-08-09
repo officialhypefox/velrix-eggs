@@ -1,0 +1,149 @@
+{
+  "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PANEL",
+  "meta": {
+    "version": "PLCN_v2",
+    "update_url": "https://raw.githubusercontent.com/officialhypefox/velrix-eggs/refs/heads/main/eggs/modmail.json"
+  },
+  "exported_at": "2026-08-09T00:00:00+00:00",
+  "name": "Modmail",
+  "author": "contact@velrix.net",
+  "uuid": "0763f192-921b-4a29-a721-c5efa62efd0a",
+  "description": "A shared inbox for your Discord server. Members DM the bot to open a private thread your whole staff team can read and reply to. Needs a MongoDB database, which the free MongoDB Atlas tier covers.",
+  "tags": [
+    "discord",
+    "bot",
+    "python"
+  ],
+  "features": [],
+  "docker_images": {
+    "Python 3.11": "ghcr.io/pelican-eggs/yolks:python_3.11"
+  },
+  "file_denylist": [],
+  "startup": "export PIP_USER=1; export PIP_DISABLE_PIP_VERSION_CHECK=1; export PYTHONUNBUFFERED=1; export USING_DOCKER=yes; export PATH=/home/container/.local/bin:$PATH; for v in MODMAIL_GUILD_ID OWNERS LOG_URL; do [[ -z \"${!v:-}\" ]] && unset \"$v\"; done; if [[ \"{{AUTO_UPDATE}}\" == \"1\" ]] && [[ -d .git ]]; then echo \"Checking for a Modmail update...\"; if git pull -q --ff-only --no-tags; then pip install -q -U -r requirements.txt; else echo \"Update skipped: local changes or a diverged branch. Booting the installed version.\"; fi; fi; python bot.py",
+  "config": {
+    "files": "{}",
+    "startup": "{\n    \"done\": [\n        \"Logged in as:\"\n    ]\n}",
+    "logs": "{}",
+    "stop": "^C"
+  },
+  "scripts": {
+    "installation": {
+      "script": "#!/bin/bash\n# Modmail installation\n#\n# Server files: /mnt/server at install time, /home/container at run time.\n\nset -euo pipefail\n\nMODMAIL_BRANCH=\"${MODMAIL_BRANCH:-master}\"\nREPO=\"https://github.com/modmail-dev/Modmail.git\"\n\n# -qq plus noninteractive: apt's per-package Unpacking/Setting up chatter is\n# most of this log and nobody reads it. Errors still print.\necho \"Installing prerequisites...\"\nexport DEBIAN_FRONTEND=noninteractive\napt-get -qq update\napt-get -qq install -y --no-install-recommends git ca-certificates\n\n# --user installs resolve .local against $HOME at run time, which is the one\n# thing that differs between this container and the runtime one: /mnt/server\n# here, /home/container there. It is the same directory on the same volume, so\n# pointing HOME at it now puts every package exactly where the bot will look\n# for it later. A venv could not do this -- it hardcodes its own path.\n#\n# The path it lands in is .local/lib/pythonX.Y/site-packages, so this image's\n# Python MINOR version has to match the runtime yolk's or the bot boots into an\n# empty site-packages. That is why the egg pins exactly one docker image: adding\n# a Python 3.12 option without changing this container is a silent break.\nexport HOME=/mnt/server\nmkdir -p \"${HOME}\"\ncd \"${HOME}\"\n\n# git init + fetch rather than git clone, because clone refuses a non-empty\n# directory and this script has to survive a reinstall over an existing server.\n# checkout -f overwrites whatever is tracked; plugins/, config.json and .env are\n# all gitignored upstream, so a user's own files and settings survive it.\necho \"Fetching Modmail (${MODMAIL_BRANCH})...\"\nif [ ! -d .git ]; then\n    git init -q .\nfi\nif git remote | grep -qx origin; then\n    git remote set-url origin \"${REPO}\"\nelse\n    git remote add origin \"${REPO}\"\nfi\ngit fetch -q --depth 1 origin \"${MODMAIL_BRANCH}\"\ngit checkout -qf -B \"${MODMAIL_BRANCH}\" \"origin/${MODMAIL_BRANCH}\"\n# Give the branch an upstream so the AUTO_UPDATE git pull at boot has somewhere\n# to pull from. A shallow checkout deepens itself on the next fetch, which is\n# fine -- the alternative is a bare \"there is no tracking information\" failure.\ngit branch -q --set-upstream-to=\"origin/${MODMAIL_BRANCH}\" \"${MODMAIL_BRANCH}\"\necho \"Checked out $(git rev-parse --short HEAD).\"\n\n# --root-user-action=ignore: the installer container IS root by design, so pip's\n# warning is advice for a situation that cannot arise here.\n# --no-cache-dir: HOME is the server volume, so the cache would be written into\n# the user's own files and count against their disk, for a cache no later\n# install can read since this container is discarded.\n# --progress-bar off: nothing watches this log while it streams.\n# --disable-pip-version-check: \"a new release of pip is available\" is advice for\n# someone with a shell, and this container is gone by the time anyone reads it.\nPIP_FLAGS=\"--user --upgrade --no-warn-script-location --root-user-action=ignore --progress-bar off --no-cache-dir --disable-pip-version-check\"\n\necho \"Installing Python dependencies...\"\n# pip is deliberately not upgraded first. Every requirement below is pinned to an\n# exact version by upstream's lockfile, so a newer resolver has nothing to decide,\n# and a --user pip would put ~15 MB of tooling on the server's disk quota to do it.\npython -m pip install ${PIP_FLAGS} -r requirements.txt\n\n# A wheel that silently failed to land shows up at boot as a traceback on a\n# server nobody is watching, so fail here instead, while the log is on screen.\n# cairosvg is deliberately NOT imported: it dlopens libcairo, which this image\n# does not carry and the runtime yolk does, so a check here would fail for the\n# wrong reason. Modmail hard-exits at boot when that import fails, so the yolk\n# the egg runs on has to keep carrying libcairo.so.2, libpango and gdk-pixbuf.\necho \"Verifying the install...\"\npython - <<'PYCHECK'\nimport sys\n\nsys.path.insert(0, \"/mnt/server\")\nimport discord  # noqa: F401\nimport motor  # noqa: F401\n\nprint(f\"discord.py {discord.__version__}\")\nPYCHECK\n\nmkdir -p \"${HOME}/plugins\"\n\necho\necho \"Modmail install complete.\"\necho\n# Worth naming rather than hiding behind --no-warn-conflicts: it is a true\n# statement, and it is the sort of red text that becomes a support ticket. The\n# Python image ships wheel, wheel wants packaging >= 24, and upstream's lockfile\n# pins packaging 23.2. Modmail imports neither -- the check above proves the tree\n# it does import is intact. Phrased as a conditional because a reinstall that\n# changes nothing does not reach the resolver and so prints no conflict.\necho \"If pip reported a 'wheel'/'packaging' conflict above, it is expected and harmless.\"\necho \"Modmail will not start until CONNECTION_URI points at a MongoDB database.\"\nexit 0",
+      "container": "python:3.11-slim-bookworm",
+      "entrypoint": "bash"
+    }
+  },
+  "variables": [
+    {
+      "name": "Bot Token",
+      "description": "Your bot's token from the Discord Developer Portal (Bot -> Reset Token). Turn on the Server Members and Message Content intents on the same page, or the bot will not start.",
+      "env_variable": "TOKEN",
+      "default_value": "",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": [
+        "required",
+        "string",
+        "max:128"
+      ],
+      "sort": 1
+    },
+    {
+      "name": "Server ID",
+      "description": "The ID of the Discord server this bot handles modmail for. Turn on Developer Mode in Discord, then right-click the server and Copy Server ID.",
+      "env_variable": "GUILD_ID",
+      "default_value": "",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": [
+        "required",
+        "string",
+        "max:32"
+      ],
+      "sort": 2
+    },
+    {
+      "name": "MongoDB Connection URI",
+      "description": "Where Modmail stores its threads, logs and settings. There is no database inside this server, so point it at a MongoDB you control. A free MongoDB Atlas cluster is what the Modmail docs recommend. Allow access from any IP on the Atlas side, since this server's address can change.",
+      "env_variable": "CONNECTION_URI",
+      "default_value": "",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": [
+        "required",
+        "string",
+        "max:512"
+      ],
+      "sort": 3
+    },
+    {
+      "name": "Bot Owners",
+      "description": "Discord user IDs allowed to run owner-only commands, separated by commas and nothing else. Leave empty to allow only the bot's application owner.",
+      "env_variable": "OWNERS",
+      "default_value": "",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": [
+        "nullable",
+        "string",
+        "max:255"
+      ],
+      "sort": 4
+    },
+    {
+      "name": "Staff Server ID",
+      "description": "Only for the two-server setup, where threads are created in a separate staff server. Leave empty to keep everything in the server above.",
+      "env_variable": "MODMAIL_GUILD_ID",
+      "default_value": "",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": [
+        "nullable",
+        "string",
+        "max:32"
+      ],
+      "sort": 5
+    },
+    {
+      "name": "Log Viewer URL",
+      "description": "The address of your Modmail log viewer, if you run one. Leave empty and thread logs are still saved, the links posted in Discord just will not open anywhere.",
+      "env_variable": "LOG_URL",
+      "default_value": "",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": [
+        "nullable",
+        "string",
+        "max:255"
+      ],
+      "sort": 6
+    },
+    {
+      "name": "Update On Boot",
+      "description": "Pull the latest Modmail each time the server starts. It is skipped automatically if you have edited the bot's own files.",
+      "env_variable": "AUTO_UPDATE",
+      "default_value": "1",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": [
+        "required",
+        "boolean"
+      ],
+      "sort": 7
+    },
+    {
+      "name": "Modmail Branch",
+      "description": "Which branch to install. master is the stable one. Changing this only takes effect when the server is reinstalled.",
+      "env_variable": "MODMAIL_BRANCH",
+      "default_value": "master",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": [
+        "required",
+        "string",
+        "max:64"
+      ],
+      "sort": 8
+    }
+  ]
+}
