@@ -230,6 +230,35 @@ add it back, and say so in a comment.
 directory, so `pip` writes its cache into their files and charges their disk quota
 for a cache that is discarded with the container. `--no-cache-dir`.
 
+**Tell git the volume is safe, through the environment.** The script runs as root
+and the volume belongs to the node's container user, so git treats it as
+"dubious ownership" and refuses every command against it, including the `git init`
+you were about to run. Set the exception like this, before the first git call:
+
+```bash
+export GIT_CONFIG_COUNT=1
+export GIT_CONFIG_KEY_0=safe.directory
+export GIT_CONFIG_VALUE_0=/mnt/server
+```
+
+Not `git config --global`. If the script repoints `HOME` at the volume, and most
+of ours do, git's "global" config moves with it, so the exception ends up in a
+file git has stopped reading and the install fails exactly as if it were never
+set. The environment form does not care where `HOME` points.
+
+**Leave the files owned by the volume's user.** Everything the script writes is
+owned by root, and the server runs as somebody else. The volume's own directory
+already carries the right ownership, so copy it downward instead of guessing a
+uid:
+
+```bash
+chown -R --reference=/mnt/server /mnt/server
+```
+
+Wings chowns after an install, so on a healthy node this is a no-op that costs one
+pass over the tree. It is worth having anyway: a first boot that cannot write its
+own log directory is a confusing failure, and this removes the whole class of it.
+
 **Make reinstall work.** A user can reinstall an existing server, so the script
 runs over a directory that already has files in it. `git clone` refuses a
 non-empty directory. Use `git init` plus `git fetch` plus `git checkout -f`, which
@@ -350,6 +379,39 @@ podman run --rm \
 Every egg variable the script reads has to be passed with `-e`, exactly as the
 panel would.
 
+### 1b. The install container, on a volume you do not own
+
+**Do the run above a second time against a directory owned by a different user.**
+This is not optional and it is the step most likely to be skipped.
+
+Rootless Podman maps your host user to root inside the container, so in the run
+above root *is* the owner of the volume. On a real node it is not: the volume
+belongs to the node's container user and the installer is root. Anything that
+depends on that mismatch, which is git's ownership check and every file
+permission the install leaves behind, is invisible until you reproduce it.
+
+```bash
+podman unshare rm -rf server && mkdir server
+podman unshare chown -R 500:500 server
+# then run the install exactly as in step 1
+```
+
+`podman unshare` runs the command inside the same user namespace the container
+uses, which is the only way to set and inspect these ownerships from the host.
+You will need it to delete the directory afterwards too.
+
+Afterwards, check where the files landed:
+
+```bash
+podman unshare stat -c '%u:%g %n' server server/.git server/<some-installed-file>
+```
+
+Everything should read `500:500`. Anything reading `0:0` is a file the server
+will not be able to write to.
+
+We shipped the Modmail egg without this step and it failed on the first real
+install, on the first git command.
+
 ### 2. The runtime container
 
 ```bash
@@ -377,6 +439,10 @@ your egg. `keep-id` lines the two up.
 
 **Pass the optional variables as empty strings**, exactly as written above. That
 is what the panel does, and it is the case most likely to be broken.
+
+If you ran the foreign-ownership install from step 1b, boot that volume with
+`--user 500:500` instead of `--userns=keep-id`, so the process runs as the user
+that owns the files. That is the pairing a real node produces.
 
 ### What a passing test looks like
 
@@ -431,6 +497,14 @@ cairo, pango and gdk-pixbuf. Check with:
 podman run --rm --entrypoint bash <image> -c 'ldconfig -p | grep -i cairo'
 ```
 
+**Root installs onto a volume it does not own.** Two separate failures come out of
+this, and rootless Podman hides both unless you test for them deliberately. Git
+refuses to run at all ("detected dubious ownership"), and every file the install
+writes is left owned by root, which the server user cannot write to. Both fixes
+are in the install script section above. Note that the git one interacts with
+`HOME`: `git config --global` is the obvious fix and it is the wrong one in any
+script that repoints `HOME` at the volume.
+
 **Absolute paths recorded at install time.** Red's `redbot-setup` resolves and
 saves its data path, which follows any symlink straight back to `/mnt/server`, a
 directory that does not exist at run time. Read the config the installer wrote and
@@ -455,6 +529,8 @@ leaving it unexplained would generate tickets.
 - [ ] Install container's language version matches the runtime image
 - [ ] Install script has `set -euo pipefail`, is quiet, and verifies before exit
 - [ ] Reinstall over an existing server works and keeps the user's files
+- [ ] Git exception set through `GIT_CONFIG_*`, not `git config --global`
+- [ ] Files left owned by the volume's user, not root
 - [ ] No package cache or build junk left on the volume
 - [ ] Startup line unsets empty optional variables
 - [ ] Output is unbuffered
@@ -464,6 +540,7 @@ leaving it unexplained would generate tickets.
 - [ ] Every variable uses the software's own env var name
 - [ ] Every description says where to get the value and what empty means
 - [ ] Tested under Podman: fresh install, reinstall, boot, empty optionals
+- [ ] Tested against a volume owned by a different uid (step 1b)
 - [ ] Commit message explains the decisions
 
 ## Briefing Claude Code
@@ -504,6 +581,10 @@ Add anything you already know that is not obvious from the repo, for example
   dependencies` is a script nobody can safely change later.
 - **Does reinstall work?** Ask directly. It is easy to skip and it breaks in
   production, not in testing.
+- **Was it tested against a volume it does not own?** The default Podman recipe
+  makes root the volume owner, which is not what a node does, and it hides both
+  the git ownership check and every file-permission mistake. Ask for the
+  `podman unshare chown` run specifically.
 
 Claude will push to `main` when the change needs nothing from you, and will flag
 what it cannot do itself. Importing a new egg into the panel is always yours.
