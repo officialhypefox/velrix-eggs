@@ -1,6 +1,11 @@
 # Velrix Eggs
 
-Pterodactyl eggs with automated icon management system.
+Pelican eggs for the Velrix panel, with automated icon management.
+
+Each file in `eggs/` describes how one piece of software is installed and run.
+Adding or changing one? Read **[docs/writing-eggs.md](docs/writing-eggs.md)**
+first. It covers how eggs work, how to read an upstream project well enough to
+package it, how to test locally with Podman, and how to brief Claude Code.
 
 ## Usage
 
