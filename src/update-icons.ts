@@ -117,6 +117,13 @@ async function updateEggFile(
   const orderedEggData: any = {};
 
   for (const [key, value] of Object.entries(eggData)) {
+    // Skip a pre-existing image: it is set explicitly right after
+    // "description" below, and copying it here as well would run second and
+    // overwrite the freshly-fetched data URI with the stale one already in
+    // the file — which is exactly why re-running this on an egg that already
+    // has an icon used to be a silent no-op.
+    if (key === "image") continue;
+
     orderedEggData[key] = value;
 
     if (key === "description") {
