@@ -535,11 +535,53 @@ and nothing in the install needs it, since pip builds sdists in an isolated
 environment with its own copy. Uninstalling it removes the conflict for real and
 leaves the resolver free to report a genuine one.
 
+**The install container runs as the image's user, not as root.** Wings sets no
+user on the install container, so whatever the image's `USER` says is what the
+script runs as. The pelican installer images are root, which is why every egg
+here uses one; the *yolk* images are not, they drop to their own `container`
+user. Using a yolk as an install image therefore looks reasonable and fails on a
+real node, where the volume belongs to the node's user and not to the yolk's,
+with a permission error on the first write. An install image has to be a root
+image: one of `ghcr.io/pelican-eggs/installers:*`, or the software's own upstream
+image, like `python:3.11-slim-bookworm` or `docker.io/oven/bun:1-debian`.
+
+Note that this is only true of the install container. Wings *does* set the user
+on the runtime container, which is why the yolk's own uid never matters there.
+
+**Native Node modules pin themselves to the interpreter and to the base image,
+and the two containers have to agree.** `@discordjs/opus` loads its binary from a
+directory whose name contains the ABI number the interpreter reports and the
+glibc version of the image it was built in
+(`prebuild/node-v147-napi-v3-linux-x64-glibc-2.41/`). Compile it on a different
+Debian release, or under a different Bun, and the file is there but the runtime
+computes another name and does not find it. So for an egg with native modules the
+install image has to match the runtime image's base as well as its language
+version, so the checklist item above is not only about the language.
+
+That is not the same problem as two native modules disagreeing with each other.
+`canvas` ships prebuilt and carries its own `libstdc++.so.6` next to the binary,
+older than the one anything compiled during the install links against, and the
+first module to load wins for the whole process. In the CorwinDev Discord-Bot egg
+canvas loads first, so Opus then could not find `CXXABI_1.3.15` and the radio
+handler died at every boot. Deleting the bundled copy in the install script fixes
+it: canvas then resolves libstdc++ normally and finds the image's own, which is
+new enough for both. The install script verifies the two in the order the
+software loads them, because verifying them in the other order hides it.
+
+Both of these survive a fix in the egg but not a rebuild of a rolling runtime
+tag: `yolks:bun_latest` is the only Bun yolk published, so the day it is rebuilt
+with a Bun that reports a different ABI, every server installed before it is
+looking for a path that no longer matches. That is worth a line in the startup
+command: load the native modules, and if they do not load, say so and name
+Reinstall as the fix rather than leaving the user with a traceback.
+
 ## Checklist
 
 - [ ] Fresh `uuid`, correct `meta.update_url`, filename matches
 - [ ] `docker_images` lists only images the egg actually works on
 - [ ] Install container's language version matches the runtime image
+- [ ] Install image runs as root, and shares the runtime image's base if
+      anything native is compiled during the install
 - [ ] Install script has `set -euo pipefail`, is quiet, and verifies before exit
 - [ ] Reinstall over an existing server works and keeps the user's files
 - [ ] Git exception set through `GIT_CONFIG_*`, not `git config --global`

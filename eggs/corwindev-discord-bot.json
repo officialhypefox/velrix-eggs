@@ -1,0 +1,303 @@
+{
+  "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PANEL",
+  "meta": {
+    "version": "PLCN_v2",
+    "update_url": "https://raw.githubusercontent.com/officialhypefox/velrix-eggs/refs/heads/main/eggs/corwindev-discord-bot.json"
+  },
+  "exported_at": "2026-08-26T00:00:00+00:00",
+  "name": "CorwinDev Discord-Bot",
+  "author": "contact@velrix.net",
+  "uuid": "5898f4e2-da0a-48ba-99ab-161be939614f",
+  "description": "An all-in-one Discord bot with around 400 commands: moderation, automod, tickets, music, giveaways, economy, levels, invite and message tracking, server stats and suggestions. Runs on Bun. Needs a MongoDB database of your own and about 1 GB of disk, since its dependencies are around 360 MB on their own.",
+  "tags": [
+    "discord",
+    "bot",
+    "bun"
+  ],
+  "features": [],
+  "docker_images": {
+    "Bun Latest": "ghcr.io/pelican-eggs/yolks:bun_latest"
+  },
+  "file_denylist": [],
+  "startup": "export PATH=/home/container/node_modules/.bin:$PATH; export BUN_INSTALL_CACHE_DIR=/home/container/.cache/bun; for v in DISCORD_STATUS BOT_ID GIPHY_TOKEN OPENAI TOPGG_TOKEN RADIO SPOTIFY_CLIENT_ID SPOTIFY_CLIENT_SECRET LAVALINK_HOST LAVALINK_PORT LAVALINK_PASSWORD LAVALINK_SECURE; do [[ -z \"${!v:-}\" ]] && unset \"$v\"; done; if [[ \"{{AUTO_UPDATE}}\" == \"1\" ]] && [[ -d .git ]]; then echo \"Checking for a Discord-Bot update...\"; if git pull -q --ff-only --no-tags; then bun install --production; rm -f node_modules/canvas/build/Release/libstdc++.so.6; else echo \"Update skipped: local changes or a diverged branch. Booting the installed version.\"; fi; fi; bun -e 'require(\"canvas\"); require(\"@discordjs/opus\")' >/dev/null 2>&1 || echo \"The native modules do not load under this Bun build. Press Reinstall in the panel to rebuild them, your server files are kept.\"; bun src/index.js",
+  "config": {
+    "files": "{}",
+    "startup": "{\n    \"done\": [\n        \"Started on\"\n    ]\n}",
+    "logs": "{}",
+    "stop": "^C"
+  },
+  "scripts": {
+    "installation": {
+      "script": "#!/bin/bash\n# CorwinDev Discord-Bot installation\n#\n# Server files: /mnt/server at install time, /home/container at run time.\n#\n# The installer is the official Bun image, on the same Debian release as the\n# runtime yolk and root by default -- wings sets no user for the install\n# container, so an image that drops privileges cannot write to the volume.\n# Matching the base matters beyond that: @discordjs/opus loads its binary from a\n# directory whose name contains the interpreter's ABI number and the image's\n# glibc version, so an installer built on a different Debian leaves behind a\n# binary the runtime looks for under another name and does not find.\n\nset -euo pipefail\n\nBOT_BRANCH=\"${BOT_BRANCH:-main}\"\nREPO=\"https://github.com/CorwinDev/Discord-Bot.git\"\n\n# Nobody reads a successful apt log: -qq quiets apt, and stdout to /dev/null\n# quiets dpkg, which -qq does not cover and which would otherwise contribute\n# three hundred Unpacking/Setting up lines on its own. Errors go to stderr and\n# still print.\n#\n# g++, make and python3 are node-gyp's toolchain, and they are here for exactly\n# one package: @discordjs/opus ships prebuilt binaries per Node ABI and publishes\n# none for the ABI Bun reports, so it compiles from source. It is not optional\n# -- the bot's radio handler builds an audio resource on every ready, and that\n# needs an Opus encoder whether or not anyone ever uses the radio.\necho \"Installing prerequisites...\"\nexport DEBIAN_FRONTEND=noninteractive\napt-get -qq update >/dev/null\napt-get -qq install -y --no-install-recommends git ca-certificates g++ make python3 >/dev/null\n\n# The volume belongs to the node's container user and this script runs as root,\n# so git calls the repository \"dubious ownership\" and refuses every command\n# against it, including the git init below. Set through the environment rather\n# than `git config --global`, which writes to a file whose location follows HOME\n# and is easy to lose track of.\nexport GIT_CONFIG_COUNT=1\nexport GIT_CONFIG_KEY_0=safe.directory\nexport GIT_CONFIG_VALUE_0=/mnt/server\n\n# Bun's download cache, kept off the volume: HOME is left alone (it is not the\n# volume here), and /tmp is a 100 MB tmpfs on a wings node while this dependency\n# tree unpacks to ~360 MB. The container is discarded, so nothing can read the\n# cache back anyway.\nexport BUN_INSTALL_CACHE_DIR=/var/cache/bun\n\nmkdir -p /mnt/server\ncd /mnt/server\n\n# git init + fetch rather than git clone, because clone refuses a non-empty\n# directory and this script has to survive a reinstall over an existing server.\n# checkout -f only overwrites tracked files, so a .env the user wrote by hand\n# and anything else they added survives it.\necho \"Fetching Discord-Bot (${BOT_BRANCH})...\"\nif [ ! -d .git ]; then\n    git init -q .\nfi\nif git remote | grep -qx origin; then\n    git remote set-url origin \"${REPO}\"\nelse\n    git remote add origin \"${REPO}\"\nfi\ngit fetch -q --depth 1 origin \"${BOT_BRANCH}\"\ngit checkout -qf -B \"${BOT_BRANCH}\" \"origin/${BOT_BRANCH}\"\n# Give the branch an upstream so the update-on-boot git pull has somewhere to\n# pull from. The shallow checkout deepens itself on that first fetch, which is\n# fine -- the alternative is a bare \"no tracking information\" failure at boot.\ngit branch -q --set-upstream-to=\"origin/${BOT_BRANCH}\" \"${BOT_BRANCH}\"\necho \"Checked out $(git rev-parse --short HEAD).\"\n\n# There is no bun.lock upstream, only package-lock.json; bun migrates it on the\n# first install and writes bun.lock next to it, which is untracked and therefore\n# survives the checkout above.\necho \"Installing dependencies with Bun $(bun --version)...\"\nbun install --production\n\n# canvas ships prebuilt and carries its own copy of libstdc++ next to the\n# binary, and that copy is older than the one @discordjs/opus was just compiled\n# against here. Whichever loads first wins for the whole process, and the bot\n# loads canvas first -- every image command requires it while commands are being\n# registered, and the radio handler only reaches for Opus once the client is\n# ready. So the bundled copy gets loaded, and Opus then fails to find\n# CXXABI_1.3.15 in it and takes the radio handler down at every boot.\n#\n# Deleting it makes canvas resolve libstdc++ normally, which finds the runtime\n# image's own copy: newer than what canvas was built against, older than nothing\n# it needs, and new enough for Opus. The rest of canvas's bundled libraries\n# (cairo, pango, pixman and friends) are left alone -- the runtime yolk carries\n# those too, but the versions have not been checked and canvas is happy with its\n# own.\nrm -f /mnt/server/node_modules/canvas/build/Release/libstdc++.so.6\n\n# A dependency that silently failed to land shows up later as a traceback in a\n# console nobody is watching, so fail here while the log is still on screen.\n# canvas and @discordjs/opus are the two native ones, and they are required in\n# that order deliberately: it is the order the bot itself loads them in, and it\n# is the order that catches the libstdc++ clash above rather than hiding it.\n#\n# zlib-sync is deliberately not checked. It is a V8-API module, which Bun cannot\n# load at all; discord.js catches that and falls back to identify compression,\n# and one warning per shard is the entire cost.\necho \"Verifying the install...\"\nbun -e 'require(\"canvas\"); require(\"@discordjs/opus\"); require(\"mongoose\"); console.log(\"discord.js \" + require(\"discord.js\").version + \", canvas and Opus load together.\")'\n\n# Everything above was written by root, and the server runs as the node's\n# container user, which cannot write to root-owned files. The volume's own\n# directory already carries the ownership the node wants, so copy it downward\n# rather than guessing a uid. Wings chowns after an install too, so on a healthy\n# node this is a no-op that costs one pass over the tree; it is worth having\n# because a first boot that cannot write its own files is a confusing failure.\necho \"Handing the files to the server user...\"\nchown -R --reference=/mnt/server /mnt/server\n\necho\necho \"Discord-Bot install complete.\"\necho \"It will not start until MONGO_TOKEN points at a MongoDB database.\"\nexit 0\n",
+      "container": "docker.io/oven/bun:1-debian",
+      "entrypoint": "bash"
+    }
+  },
+  "variables": [
+    {
+      "name": "Bot Token",
+      "description": "Your bot's token from the Discord Developer Portal (Bot -> Reset Token). Turn on the Server Members and Message Content intents on the same page, or the bot will start and then sit there doing nothing.",
+      "env_variable": "DISCORD_TOKEN",
+      "default_value": "",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": [
+        "required",
+        "string",
+        "max:128"
+      ],
+      "sort": 1
+    },
+    {
+      "name": "Application ID",
+      "description": "Your application's ID, from General Information on the same page as the token. The bot re-registers all of its slash commands against this ID every time it starts, so if it is wrong the bot runs but no slash commands ever appear in Discord.",
+      "env_variable": "DISCORD_ID",
+      "default_value": "",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": [
+        "required",
+        "string",
+        "max:32"
+      ],
+      "sort": 2
+    },
+    {
+      "name": "MongoDB Connection URI",
+      "description": "Where the bot keeps everything: settings, tickets, economy balances, levels, giveaways. There is no database inside this server, so point it at a MongoDB you control; a free MongoDB Atlas cluster is enough to start with. Allow access from any IP on the Atlas side, because this server's outbound address can change. The bot exits immediately if it cannot connect, so this is the first thing to check if it will not stay up.",
+      "env_variable": "MONGO_TOKEN",
+      "default_value": "",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": [
+        "required",
+        "string",
+        "max:512"
+      ],
+      "sort": 3
+    },
+    {
+      "name": "Log Webhook ID",
+      "description": "The bot posts its own logs -- startup, shard state, errors, command use -- to one Discord webhook, and it has no setting to turn that off. Make one in any channel you like: Edit Channel -> Integrations -> Webhooks -> New Webhook -> Copy Webhook URL. The URL ends in /api/webhooks/<id>/<token>, and the long number is this value. Without it the bot still works, but every log it tries to send prints a stack trace in this console instead.",
+      "env_variable": "WEBHOOK_ID",
+      "default_value": "",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": [
+        "required",
+        "string",
+        "max:32"
+      ],
+      "sort": 4
+    },
+    {
+      "name": "Log Webhook Token",
+      "description": "The rest of the same webhook URL, the part after the ID. Treat it like a password: anyone who has it can post to that channel.",
+      "env_variable": "WEBHOOK_TOKEN",
+      "default_value": "",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": [
+        "required",
+        "string",
+        "max:128"
+      ],
+      "sort": 5
+    },
+    {
+      "name": "Status Messages",
+      "description": "What the bot shows as its activity, picked at random and changed every 50 seconds. Separate several with a comma and a space, exactly like this: /help, 400+ commands, my server. Leave empty to get the bot's own rotation, which includes its server count and version.",
+      "env_variable": "DISCORD_STATUS",
+      "default_value": "",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": [
+        "nullable",
+        "string",
+        "max:255"
+      ],
+      "sort": 6
+    },
+    {
+      "name": "Lavalink Host",
+      "description": "The Lavalink node the music commands play audio through. Music is the one thing this bot cannot do by itself: it needs a Lavalink server, and the default here is the free public node upstream ships with. Replace it with your own node's address for anything serious, since a public node is shared with everyone and goes down without warning. You never need Java inside this server. Clearing this falls back to the same default.",
+      "env_variable": "LAVALINK_HOST",
+      "default_value": "lavalinkv4.serenetia.com",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": [
+        "nullable",
+        "string",
+        "max:255"
+      ],
+      "sort": 7
+    },
+    {
+      "name": "Lavalink Port",
+      "description": "The port of the Lavalink node above. 80 for the public default; a self-hosted node listens on 2333 unless you changed it.",
+      "env_variable": "LAVALINK_PORT",
+      "default_value": "80",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": [
+        "nullable",
+        "string",
+        "max:5"
+      ],
+      "sort": 8
+    },
+    {
+      "name": "Lavalink Password",
+      "description": "The password of the Lavalink node above. The default looks like a URL because that is genuinely the public node's password. A self-hosted node uses whatever is in its application.yml, which is youshallnotpass out of the box.",
+      "env_variable": "LAVALINK_PASSWORD",
+      "default_value": "https://seretia.link/discord",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": [
+        "nullable",
+        "string",
+        "max:255"
+      ],
+      "sort": 9
+    },
+    {
+      "name": "Lavalink Uses SSL",
+      "description": "Set this to true only if the Lavalink node above is reachable over https/wss. The public default is plain http, so leave it false unless your own node has a certificate.",
+      "env_variable": "LAVALINK_SECURE",
+      "default_value": "false",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": [
+        "nullable",
+        "string",
+        "max:5"
+      ],
+      "sort": 10
+    },
+    {
+      "name": "Spotify Client ID",
+      "description": "Optional. With a Spotify app's client ID and secret from developer.spotify.com/dashboard, the music commands can resolve Spotify tracks, albums and playlists. Leave both empty and Spotify links are simply not understood; YouTube and the rest still work.",
+      "env_variable": "SPOTIFY_CLIENT_ID",
+      "default_value": "",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": [
+        "nullable",
+        "string",
+        "max:128"
+      ],
+      "sort": 11
+    },
+    {
+      "name": "Spotify Client Secret",
+      "description": "The client secret for the Spotify app above. Both halves have to be filled in or neither is used.",
+      "env_variable": "SPOTIFY_CLIENT_SECRET",
+      "default_value": "",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": [
+        "nullable",
+        "string",
+        "max:128"
+      ],
+      "sort": 12
+    },
+    {
+      "name": "Giphy API Key",
+      "description": "Optional, and used by exactly one command: /gif. Get a key from developers.giphy.com (an API key, not an SDK key). Empty means /gif comes back with nothing; every other fun command is unaffected.",
+      "env_variable": "GIPHY_TOKEN",
+      "default_value": "",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": [
+        "nullable",
+        "string",
+        "max:128"
+      ],
+      "sort": 13
+    },
+    {
+      "name": "OpenAI API Key",
+      "description": "Optional. Turns on the chatbot channel, where the bot answers ordinary messages in a channel you designate. Get a key from platform.openai.com; the requests are billed to that account, so expect a bill if your server is busy. Empty disables the chatbot and nothing else.",
+      "env_variable": "OPENAI",
+      "default_value": "",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": [
+        "nullable",
+        "string",
+        "max:255"
+      ],
+      "sort": 14
+    },
+    {
+      "name": "Radio Stream URL",
+      "description": "The stream the 24/7 radio commands play. Any direct audio stream address works; a station's web page does not. Empty plays the Dutch station upstream ships as its default.",
+      "env_variable": "RADIO",
+      "default_value": "",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": [
+        "nullable",
+        "string",
+        "max:255"
+      ],
+      "sort": 15
+    },
+    {
+      "name": "Top.gg Token",
+      "description": "Optional, and only useful if your bot is listed on top.gg. When set, the bot posts its server count there every 30 minutes and uploads its command list once at startup.",
+      "env_variable": "TOPGG_TOKEN",
+      "default_value": "",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": [
+        "nullable",
+        "string",
+        "max:255"
+      ],
+      "sort": 16
+    },
+    {
+      "name": "Top.gg Bot ID",
+      "description": "Only used to build the link that /vote hands out. Set it to the same value as the Application ID if your bot is listed on top.gg; leave it empty if it is not, and the vote link goes nowhere.",
+      "env_variable": "BOT_ID",
+      "default_value": "",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": [
+        "nullable",
+        "string",
+        "max:32"
+      ],
+      "sort": 17
+    },
+    {
+      "name": "Update On Boot",
+      "description": "Pull the latest Discord-Bot from GitHub each time the server starts and install any dependencies that were added. It is skipped automatically if you have edited the bot's own files, and an update that fails never stops the server from starting.",
+      "env_variable": "AUTO_UPDATE",
+      "default_value": "1",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": [
+        "required",
+        "boolean"
+      ],
+      "sort": 18
+    },
+    {
+      "name": "Branch",
+      "description": "Which branch of CorwinDev/Discord-Bot to install. main is the branch upstream develops and releases from. Changing this only does something when the server is reinstalled, and a reinstall resets the bot's own files while keeping anything you added yourself.",
+      "env_variable": "BOT_BRANCH",
+      "default_value": "main",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": [
+        "required",
+        "string",
+        "max:64"
+      ],
+      "sort": 19
+    }
+  ]
+}
