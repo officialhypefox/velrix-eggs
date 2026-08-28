@@ -548,6 +548,20 @@ image, like `python:3.11-slim-bookworm` or `docker.io/oven/bun:1-debian`.
 Note that this is only true of the install container. Wings *does* set the user
 on the runtime container, which is why the yolk's own uid never matters there.
 
+**And the installer images carry git, curl and unzip, nothing else.** No
+language runtime, no compiler. Every runtime egg here used to end with a version
+check, and three of them installed dependencies, all by running a binary that is
+not in that image; `set -e` turned each one into an install that failed *after*
+the clone had already worked, which is the least legible place for it. For a
+runtime egg the dependency install belongs in the startup command anyway, where
+it runs against the runtime that will load the result, which matters the moment
+a dependency is native. Check before you write the line:
+
+```bash
+podman run --rm --entrypoint bash ghcr.io/pelican-eggs/installers:debian \
+  -c 'command -v node npm python3 || echo "not in this image"'
+```
+
 **Native Node modules pin themselves to the interpreter and to the base image,
 and the two containers have to agree.** `@discordjs/opus` loads its binary from a
 directory whose name contains the ABI number the interpreter reports and the
